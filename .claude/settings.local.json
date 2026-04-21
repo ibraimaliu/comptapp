@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/xampp/htdocs/gestion_comptable/views/facturation/**)",
+      "Read(//c/xampp/htdocs/gestion_comptable/models/**)",
+      "Read(//c/xampp/htdocs/gestion_comptable/controllers/**)",
+      "Bash(php install_master.php:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

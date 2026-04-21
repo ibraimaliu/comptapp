@@ -1,0 +1,19 @@
+Numéro	Intitulé	Catégorie	Type
+1	Actif	Actif	Bilan
+10	Actif immobilisé	Actif	Bilan
+100	Immobilisations corporelles	Actif	Bilan
+1000	Terrains	Actif	Bilan
+1020	Bâtiments	Actif	Bilan
+1030	Mobilier	Actif	Bilan
+2	Passif	Passif	Bilan
+20	Capitaux	Passif	Bilan
+2000	Capital social	Passif	Bilan
+2100	Réserves	Passif	Bilan
+3	Produits	Produit	Résultat
+30	Ventes	Produit	Résultat
+3200	Ventes de marchandises	Produit	Résultat
+3400	Prestations de services	Produit	Résultat
+6	Charges	Charge	Résultat
+60	Achats	Charge	Résultat
+6000	Achats de marchandises	Charge	Résultat
+6200	Fournitures	Charge	Résultat

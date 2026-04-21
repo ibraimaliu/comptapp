@@ -1,0 +1,544 @@
+/* Réinitialisation et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background: #f8fafc;
+    color: #1f2937;
+    overflow: hidden; /* Évite le double scrollbar */
+}
+
+/* ========================================
+   SÉLECTEUR DE SOCIÉTÉ ET EXERCICE
+   ======================================== */
+.company-selector-bar {
+    position: fixed;
+    top: 0;
+    left: 250px; /* Aligné avec le contenu, après le menu */
+    right: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+}
+
+.selector-container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+.selector-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selector-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+
+.selector-group label i {
+    font-size: 1.1em;
+}
+
+.selector-dropdown {
+    padding: 8px 35px 8px 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 0.95em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 200px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.selector-dropdown:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.selector-dropdown:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.selector-dropdown option {
+    background: #2d3748;
+    color: white;
+    padding: 8px;
+}
+
+.selector-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-manage-companies {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1.1em;
+}
+
+.btn-manage-companies:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
+    transform: scale(1.05);
+}
+
+/* Alerte pour utilisateurs sans société */
+.no-company-alert {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.alert-content i {
+    font-size: 1.5em;
+}
+
+.alert-content span {
+    flex: 1;
+    font-weight: 500;
+}
+
+.btn-create-company {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: white;
+    color: #dc2626;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-create-company:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Structure principale de la page */
+.menus {
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background: #222;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.content {
+    flex: 1;
+    margin-left: 250px; /* Correspond à la largeur du menu */
+    padding: 70px 20px 20px 20px; /* Top padding pour la barre de sélection */
+    background: #fff;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.content > div {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Navigation */
+.menus ul {
+    position: relative;
+    list-style-type: none;
+}
+
+.menus ul li {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.menus ul li:hover {
+    background: var(--clr, #2483ff);
+}
+
+.menus ul li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.menus ul li a i {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+/* Sub-menu styles */
+.menus ul li.has-submenu > a {
+    position: relative;
+}
+
+.menus ul li.has-submenu .submenu-arrow {
+    position: absolute;
+    right: 15px;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.menus ul li.has-submenu.submenu-open .submenu-arrow {
+    transform: rotate(180deg);
+}
+
+.menus ul .submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s 0.4s;
+    padding-left: 0;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.menus ul li.has-submenu.submenu-open .submenu {
+    max-height: 600px; /* Augmenté pour supporter plus d'items */
+    opacity: 1;
+    margin-top: 5px;
+    visibility: visible;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s 0s;
+}
+
+.menus ul .submenu li {
+    margin-bottom: 5px;
+    margin-left: 15px;
+}
+
+.menus ul .submenu li a {
+    padding: 10px 15px;
+    font-size: 0.85em;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.menus ul .submenu li:hover {
+    background: transparent;
+}
+
+.menus ul .submenu li:hover a {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(3px);
+}
+
+.menus ul .submenu li.active a {
+    background: rgba(255, 255, 255, 0.15);
+    border-left: 3px solid var(--clr, #38ef7d);
+}
+
+/* Animation pour le parent quand le sous-menu est ouvert */
+.menus ul li.has-submenu {
+    transition: margin-bottom 0.3s ease;
+}
+
+.menus ul li.has-submenu.submenu-open {
+    margin-bottom: 15px;
+}
+
+/* Formulaires (login, register, etc.) */
+.login-container, .register-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #0f172a;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #2483ff;
+    box-shadow: 0 0 0 2px rgba(36, 131, 255, 0.2);
+}
+
+/* Boutons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #2483ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #1a6dcc;
+}
+
+.btn-danger {
+    background: #ef4444;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.btn-success {
+    background: #10b981;
+}
+
+.btn-success:hover {
+    background: #059669;
+}
+
+/* Alertes */
+.alert {
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+table thead {
+    background-color: #f1f5f9;
+}
+
+table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+table tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Titres */
+h1, h2, h3, h4, h5, h6 {
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+/* Écrans mobiles et petits écrans */
+@media (max-width: 768px) {
+    body {
+        display: block;
+    }
+    
+    .menus {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+    }
+    
+    .content {
+        margin-left: 0;
+        padding: 15px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+}
+
+/* Styles spécifiques pour les pages de contacts */
+.contact-info {
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    margin-bottom: 8px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button, .action-buttons a {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+/* Styles pour les formulaires d'importation */
+.import-export-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.import-options {
+    margin-top: 15px;
+}
+
+.import-options label {
+    margin-right: 15px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.import-options input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}

@@ -1,0 +1,19 @@
+# Protection du dossier uploads
+# Autoriser uniquement les fichiers PDF et PNG
+
+# Désactiver l'exécution de scripts
+Options -ExecCGI
+AddHandler cgi-script .php .pl .py .jsp .asp .sh .cgi
+<FilesMatch "\.(php|pl|py|jsp|asp|sh|cgi)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Autoriser uniquement les fichiers PDF et PNG
+<FilesMatch "\.(pdf|png)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Désactiver le listage des répertoires
+Options -Indexes

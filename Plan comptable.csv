@@ -1,0 +1,354 @@
+﻿Numéro;Intitulé;Catégorie;Type
+1;Actif;Actif;Bilan
+10;Actif circulant;Actif;Bilan
+100;Trésorerie et actifs cotés en bourse détenus à court terme;Actif;Bilan
+1000;Caisse;Actif;Bilan
+1010;Compte postal;Actif;Bilan
+1020;Banque;Actif;Bilan
+1060;Titres;Actif;Bilan
+1069;Ajustement de la valeur des titres;Actif;Bilan
+110;Créances résultant prestations envers des tiers;Actif;Bilan
+1100;Créances envers des tiers suisses;Actif;Bilan
+1109;Ducroire;Actif;Bilan
+114;Autres créances à court terme;Actif;Bilan
+1140;Avances et prêts;Actif;Bilan
+1149;Ajustement de la valeur des avances et prêts;Actif;Bilan
+1150;Acomptes aux fournisseurs;Actif;Bilan
+1170;Impôt préalable: TVA s/matériel, marchandises, prestations et énergie;Actif;Bilan
+1171;Impôt préalable: TVA s/investissements et autres charges;Actif;Bilan
+1176;Impôt anticipé;Actif;Bilan
+1180;Créances envers les assurances sociales et institutions de prévoyance;Actif;Bilan
+1189;Impôt à la source;Actif;Bilan
+1190;Autres créances à court terme;Actif;Bilan
+1199;Ajustement de la valeur des créances à court terme;Actif;Bilan
+120;Stocks et prestations non facturées;Actif;Bilan
+1200;Marchandises commerciales;Actif;Bilan
+1209;Ajustement de la valeur des marchandises commerciales;Actif;Bilan
+1230;Matières consommables;Actif;Bilan
+1250;Marchandises en consignation;Actif;Bilan
+1280;Prestations non facturées;Actif;Bilan
+130;Actifs de régularisation;Actif;Bilan
+1300;Charges payées d'avance;Actif;Bilan
+1301;Produits à recevoir;Actif;Bilan
+14;Actif immobilisés;Actif;Bilan
+140;Immobilisations financières;Actif;Bilan
+1400;Titres à long terme;Actif;Bilan
+1409;Ajustement de la valeur des titres à long terme;Actif;Bilan
+1440;Prêts;Actif;Bilan
+1441;Hypothèques;Actif;Bilan
+1449;Ajustement de la valeur des créances à long terme;Actif;Bilan
+148;Participations;Actif;Bilan
+1480;Participations;Actif;Bilan
+1489;Ajustement de la valeur des participations;Actif;Bilan
+150;Immobilisations corporelles meubles;Actif;Bilan
+1500;Machines et appareils;Actif;Bilan
+1509;Ajustement de la valeur des machines et des appareils;Actif;Bilan
+1510;Mobilier et installations;Actif;Bilan
+1519;Ajustement de la valeur du mobilier et des installations;Actif;Bilan
+1520;Machines de bureau, informatique, systèmes de communication;Actif;Bilan
+1529;Ajustement de la valeur des machines de bureau, informatique, systèmes de communication;Actif;Bilan
+1530;Véhicules;Actif;Bilan
+1539;Ajustement de la valeur des véhicules;Actif;Bilan
+1540;Outillages et appareils;Actif;Bilan
+1549;Ajustement de la valeur des outillages et appareils;Actif;Bilan
+160;Immobilisations corporelles immeubles;Actif;Bilan
+1600;Immeubles d'exploitation;Actif;Bilan
+1609;Ajustement de la valeur des immeubles d'exploitation;Actif;Bilan
+170;Immobilisations incorporelles;Actif;Bilan
+1700;Brevets, know-how, licences, droits, développement;Actif;Bilan
+1709;Ajustement de la valeur des brevets, know-how, licences, droits, développement;Actif;Bilan
+1770;Goodwill;Actif;Bilan
+1779;Ajustement de la valeur des goodwill;Actif;Bilan
+180;Capital non versé : capital social, capital de fondation;Actif;Bilan
+1850;Capital actions, capital social, droits de participations ou capital de fondation non versés;Actif;Bilan
+2;Passif;Passif;Bilan
+20;Dettes à court terme;Passif;Bilan
+200;Dettes à court terme résultant d'achats et de prestations de services;Passif;Bilan
+2000;Dettes résultant d'achats et de prestations de services;Passif;Bilan
+2010;Dettes c/charges de personnel;Passif;Bilan
+2011;Dettes c/assurances sociales;Passif;Bilan
+2030;Acomptes de clients;Passif;Bilan
+210;Dettes à court terme rémunérées;Passif;Bilan
+2100;Dettes bancaires;Passif;Bilan
+2120;Engagements de financement par leasing;Passif;Bilan
+2140;Autres dettes à court terme rémunérées;Passif;Bilan
+220;Autres dettes à court terme;Passif;Bilan
+2200;TVA due;Passif;Bilan
+2201;Décompte TVA;Passif;Bilan
+2206;Impôt anticipé dû;Passif;Bilan
+2208;Impôts directs;Passif;Bilan
+2210;Autres dettes à court terme;Passif;Bilan
+2261;Dividendes;Passif;Bilan
+2270;Assurances sociales et institutions de prévoyance;Passif;Bilan
+2279;Impôt à la source;Passif;Bilan
+230;Passifs de régularisation et provisions à court terme;Passif;Bilan
+2300;Charges à payer;Passif;Bilan
+2301;Produits encaissés d'avance;Passif;Bilan
+2330;Provisions à court terme;Passif;Bilan
+24;Dettes à long terme;Passif;Bilan
+240;Dettes à long terme rémunérées;Passif;Bilan
+2400;Dettes bancaires;Passif;Bilan
+2420;Engagements de financement par leasing;Passif;Bilan
+2430;Emprunts obligataires;Passif;Bilan
+2450;Emprunts;Passif;Bilan
+2451;Hypothèques;Passif;Bilan
+250;Autres dettes à long terme;Passif;Bilan
+2500;Autres dettes à long terme;Passif;Bilan
+260;Provisions et postes analogues prévus par la loi;Passif;Bilan
+2600;Provisions;Passif;Bilan
+28;Capitaux propres;Passif;Bilan
+280;Capital social ou capital de la fondation, le cas échéant ventilé par catégories de droits de participation;Passif;Bilan
+2800;Capital propre en début d'exercice;Passif;Bilan
+2820;Apports de capital, prélèvements sur capital;Passif;Bilan
+2850;Compte privé;Passif;Bilan
+290;Réserves, bénéfices et pertes;Passif;Bilan
+2900;Réserve générale issues du capital;Passif;Bilan
+2940;Réserves d'évaluation;Passif;Bilan
+295;Réserve légale issue du bénéfice;Passif;Bilan
+2950;Réserves légales issues du bénéfice;Passif;Bilan
+296;Réserves facultatives issues du bénéfice ou pertes cumulées;Passif;Bilan
+2960;Réserves libres;Passif;Bilan
+2970;Bénéfice reporté / Déficit reporté;Passif;Bilan
+2979;Bénéfice de l'exercice / Déficit de l'exercice;Passif;Bilan
+298;Propres parts du capital (en diminution des capitaux propres);Passif;Bilan
+2980;Propres actions, parts sociales, droits de participations (poste négatif);Passif;Bilan
+3;Chiffre d'affaires résultant des ventes et des prestations de services;Produits;Résultats
+30;Produits nets des ventes de biens et de prestations de services;Produits;Résultats
+300;Ventes brutes de produits fabriqués;Produits;Résultats
+3000;Ventes de produits fabriqués;Produits;Résultats
+320;Ventes brutes de marchandises;Produits;Résultats
+3200;Ventes de marchandises;Produits;Résultats
+3210;Ventes brutes au comptant;Produits;Résultats
+340;Ventes brutes de prestations;Produits;Résultats
+3400;Ventes de prestations;Produits;Résultats
+360;Autres ventes et prestations de services;Produits;Résultats
+3600;Autres ventes et prestations de services;Produits;Résultats
+370;Prestations propres et consommations propres;Produits;Résultats
+3700;Prestations propres;Produits;Résultats
+3710;Consommations propres;Produits;Résultats
+380;Déductions sur ventes;Produits;Résultats
+3800;Déductions sur ventes;Produits;Résultats
+3805;Pertes sur clients, variation du ducroire;Produits;Résultats
+3810;Escomptes;Produits;Résultats
+3815;Rabais et réductions de prix;Produits;Résultats
+3820;Remises;Produits;Résultats
+3825;Commissions de tiers;Produits;Résultats
+3830;Frais d'encaissement;Produits;Résultats
+3840;Différences de change;Produits;Résultats
+3850;Frets et ports;Produits;Résultats
+39;Variation des stocks de produits finis et semi-finis et des prestations de services non facturées;Produits;Résultats
+390;Variation des stocks de produits finis et semi-finis / des prestations de services non facturées;Produits;Résultats
+3900;Variation des stocks de produits semi-finis;Produits;Résultats
+3901;Variation des stocks de produits finis;Produits;Résultats
+3940;Variation de la valeur des prestations de services non facturées;Produits;Résultats
+4;Charges de matériel, de marchandises et de prestations de tiers;Charges;Résultats
+400;Charges de matériel;Charges;Résultats
+4000;Achats de matériel;Charges;Résultats
+420;Charges de marchandises;Charges;Résultats
+4200;Achats de marchandises;Charges;Résultats
+440;Charges de prestations de services;Charges;Résultats
+4400;Prestations, travaux de tiers;Charges;Résultats
+450;Charges d'énergie;Charges;Résultats
+4500;Charges d'énergie pour l'exploitation;Charges;Résultats
+490;Déductions sur les charges;Charges;Résultats
+4900;Déductions s/achats;Charges;Résultats
+4910;Escomptes;Charges;Résultats
+4915;Rabais et réductions de prix;Charges;Résultats
+4920;Remises;Charges;Résultats
+4925;Ristournes obtenues s/achats;Charges;Résultats
+4940;Différences de change;Charges;Résultats
+5;Charges de personnel;Salaires;Salaire
+500;Charges de personnel;Salaires;Salaire
+5000;Salaires;Salaires;Salaire
+5005;Prestations des assurances sociales;Salaires;Salaire
+570;Charges sociales;Salaires;Salaire
+5700;AVS, AI, APG, assurance-chômage;Salaires;Salaire
+5701;Caisse de compensation familiale;Salaires;Salaire
+5710;Assurance-accidents;Salaires;Salaire
+5730;Assurance indemnités journalières en cas maladie;Salaires;Salaire
+5750;Prévoyance professionnelle;Salaires;Salaire
+5770;Impôts à la source;Salaires;Salaire
+580;Autres charges de personnel;Salaires;Salaire
+5800;Recherche de personnel;Salaires;Salaire
+5810;Formation et formation continue;Salaires;Salaire
+5820;Indemnités effectives;Salaires;Salaire
+5825;Indemnités de frais forfaitaires;Salaires;Salaire
+5890;Autres charges de personnel;Salaires;Salaire
+590;Prestations de travail de tiers;Salaires;Salaire
+5900;Employés temporaires;Salaires;Salaire
+6;Autres charges d'exploitation, amortissement et ajustement de valeurs, résultat financier;Charges d'exploitation;Charges d'exploitation
+60;Charges de locaux;Charges d'exploitation;Charges d'exploitation
+600;Loyers et frais;Charges d'exploitation;Charges d'exploitation
+6000;Loyer;Charges d'exploitation;Charges d'exploitation
+6030;Charges accessoires;Charges d'exploitation;Charges d'exploitation
+6040;Nettoyage;Charges d'exploitation;Charges d'exploitation
+6050;Entretien;Charges d'exploitation;Charges d'exploitation
+6090;Charges de locaux comme prélèvements privés;Charges d'exploitation;Charges d'exploitation
+61;Entretien, réparations, remplacements des inst. servant à l'exploitation (ERR);Charges d'exploitation;Charges d'exploitation
+610;ERR des inst. servant à l'exploitation;Charges d'exploitation;Charges d'exploitation
+6100;ERR du mobilier de bureau;Charges d'exploitation;Charges d'exploitation
+6101;ERR des machines de bureau;Charges d'exploitation;Charges d'exploitation
+6102;ERR d'outils matériel;Charges d'exploitation;Charges d'exploitation
+6103;ERR de machines;Charges d'exploitation;Charges d'exploitation
+6105;Leasing immobilisations corporelles meubles;Charges d'exploitation;Charges d'exploitation
+62;Charges de véhicules;Charges d'exploitation;Charges d'exploitation
+620;Frais de véhicules;Charges d'exploitation;Charges d'exploitation
+6200;Réparation, service et nettoyage;Charges d'exploitation;Charges d'exploitation
+6210;Carburants;Charges d'exploitation;Charges d'exploitation
+6220;Assurances et taxes;Charges d'exploitation;Charges d'exploitation
+6260;Charges de location pour voitures en crédit-bail;Charges d'exploitation;Charges d'exploitation
+6270;Charges de véhicules comme prélèvements privés;Charges d'exploitation;Charges d'exploitation
+63;Assurances-choses, droits, taxes, autorisations;Charges d'exploitation;Charges d'exploitation
+630;Primes d'assurance;Charges d'exploitation;Charges d'exploitation
+6300;Assurance pour dommages;Charges d'exploitation;Charges d'exploitation
+6331;Primes pour cautionnement;Charges d'exploitation;Charges d'exploitation
+636;Droits et taxes;Charges d'exploitation;Charges d'exploitation
+6360;Droits;Charges d'exploitation;Charges d'exploitation
+6361;Taxes;Charges d'exploitation;Charges d'exploitation
+637;Autorisations et patentes;Charges d'exploitation;Charges d'exploitation
+6370;Autorisations;Charges d'exploitation;Charges d'exploitation
+6371;Patentes;Charges d'exploitation;Charges d'exploitation
+64;Charges d'énergie et évacuation des déchets;Charges d'exploitation;Charges d'exploitation
+640;Energie et déchets;Charges d'exploitation;Charges d'exploitation
+6400;Force motrice;Charges d'exploitation;Charges d'exploitation
+6420;Mazout;Charges d'exploitation;Charges d'exploitation
+6430;Eau;Charges d'exploitation;Charges d'exploitation
+6460;Evacuation de déchets;Charges d'exploitation;Charges d'exploitation
+6462;Eaux usées;Charges d'exploitation;Charges d'exploitation
+65;Charges d'administration et d'informatique;Charges d'exploitation;Charges d'exploitation
+650;Matériel de bureau, imprimés, photocopies;Charges d'exploitation;Charges d'exploitation
+6500;Matériel de bureau;Charges d'exploitation;Charges d'exploitation
+6501;Imprimés;Charges d'exploitation;Charges d'exploitation
+6502;Photocopies;Charges d'exploitation;Charges d'exploitation
+6503;Littérature technique;Charges d'exploitation;Charges d'exploitation
+651;Téléphone, téléfax, Internet, frais de port;Charges d'exploitation;Charges d'exploitation
+6510;Téléphone;Charges d'exploitation;Charges d'exploitation
+6511;Téléfax;Charges d'exploitation;Charges d'exploitation
+6512;Internet;Charges d'exploitation;Charges d'exploitation
+6513;Frais de port;Charges d'exploitation;Charges d'exploitation
+652;Cotisations, dons, cadeaux et pourboires;Charges d'exploitation;Charges d'exploitation
+6520;Cotisations;Charges d'exploitation;Charges d'exploitation
+6521;Dons et cadeaux;Charges d'exploitation;Charges d'exploitation
+6522;Pourboires;Charges d'exploitation;Charges d'exploitation
+653;Honoraires pour fiduciaire et conseil;Charges d'exploitation;Charges d'exploitation
+6530;Honoraires pour fiduciaire;Charges d'exploitation;Charges d'exploitation
+6531;Honoraires pour conseil;Charges d'exploitation;Charges d'exploitation
+6532;Honoraires pour conseil juridique;Charges d'exploitation;Charges d'exploitation
+654;Conseil d'administration, AG, OR;Charges d'exploitation;Charges d'exploitation
+6540;Charges pour conseil d'administration;Charges d'exploitation;Charges d'exploitation
+6541;Charges pour assemblée générale;Charges d'exploitation;Charges d'exploitation
+6542;Charges pour organe de révision;Charges d'exploitation;Charges d'exploitation
+655;Charges d'administration comme prélèvements privés;Charges d'exploitation;Charges d'exploitation
+6550;Charges d'administration comme prélèvements privés;Charges d'exploitation;Charges d'exploitation
+657;Charges et leasing d'informatique;Charges d'exploitation;Charges d'exploitation
+6570;Location en crédit-bail de matériel;Charges d'exploitation;Charges d'exploitation
+6571;Location en crédit-bail de logiciels;Charges d'exploitation;Charges d'exploitation
+6572;Loyer de matériel;Charges d'exploitation;Charges d'exploitation
+6573;Matériel de consommation;Charges d'exploitation;Charges d'exploitation
+66;Publicité;Charges d'exploitation;Charges d'exploitation
+660;Frais de publicité;Charges d'exploitation;Charges d'exploitation
+6600;Publicité dans les journaux;Charges d'exploitation;Charges d'exploitation
+6610;Imprimés publicitaires, matériel de publicité;Charges d'exploitation;Charges d'exploitation
+6611;Articles de publicité, échantillons;Charges d'exploitation;Charges d'exploitation
+6620;Vitrines, décoration;Charges d'exploitation;Charges d'exploitation
+6621;Foires, expositions;Charges d'exploitation;Charges d'exploitation
+6640;Frais de voyage;Charges d'exploitation;Charges d'exploitation
+6641;Conseils à la clientèle;Charges d'exploitation;Charges d'exploitation
+6642;Cadeaux à la clientèle;Charges d'exploitation;Charges d'exploitation
+67;Autres charges d'exploitation;Charges d'exploitation;Charges d'exploitation
+670;Informations économiques, poursuites;Charges d'exploitation;Charges d'exploitation
+6700;Informations économiques;Charges d'exploitation;Charges d'exploitation
+6701;Poursuites;Charges d'exploitation;Charges d'exploitation
+671;Sécurité et surveillance;Charges d'exploitation;Charges d'exploitation
+6710;Sécurité;Charges d'exploitation;Charges d'exploitation
+6711;Surveillance;Charges d'exploitation;Charges d'exploitation
+68;Amortissements et corrections de valeur sur les postes de l'actif immobilisé;Charges d'exploitation;Charges d'exploitation
+680;Amortissements;Charges d'exploitation;Charges d'exploitation
+6800;Amortissements s/machines et outillage;Charges d'exploitation;Charges d'exploitation
+6810;Amortissements s/mobilier et installations;Charges d'exploitation;Charges d'exploitation
+6820;Amortissements s/machines de bureau, informatique;Charges d'exploitation;Charges d'exploitation
+6830;Amortissements s/véhicules;Charges d'exploitation;Charges d'exploitation
+6850;Amortissements s/bâtiments d'exploitation;Charges d'exploitation;Charges d'exploitation
+6890;Amortissements s/charges de fondation;Charges d'exploitation;Charges d'exploitation
+69;Charges et produits financiers;Charges d'exploitation;Charges d'exploitation
+690;Charges financières;Charges d'exploitation;Charges d'exploitation
+6900;Charges financières pour crédit bancaire;Charges d'exploitation;Charges d'exploitation
+6901;Charges financières pour emprunts;Charges d'exploitation;Charges d'exploitation
+6902;Charges financières pour emprunts hypothécaires;Charges d'exploitation;Charges d'exploitation
+6904;Charges financières s/compte courant actionnaire A;Charges d'exploitation;Charges d'exploitation
+6910;Produits financiers c/intérêts moratoires, escptes;Charges d'exploitation;Charges d'exploitation
+6920;Charges financières pour financement LPP;Charges d'exploitation;Charges d'exploitation
+694;Autres charges financières;Charges d'exploitation;Charges d'exploitation
+6940;Frais de banque et des chèques postaux;Charges d'exploitation;Charges d'exploitation
+6941;Frais de dépôt;Charges d'exploitation;Charges d'exploitation
+6942;Pertes de change s/liquidités et titres;Charges d'exploitation;Charges d'exploitation
+695;Produits financiers;Charges d'exploitation;Charges d'exploitation
+6950;Produits financiers s/avoirs postaux, bancaires;Charges d'exploitation;Charges d'exploitation
+6960;Produits financiers s/avoirs à court terme;Charges d'exploitation;Charges d'exploitation
+6970;Produits financiers s/compte courant actionnaire X;Charges d'exploitation;Charges d'exploitation
+699;Autres produits financiers;Charges d'exploitation;Charges d'exploitation
+6990;Intérêts moratoires;Charges d'exploitation;Charges d'exploitation
+6991;Produits financiers s/acomptes versés;Charges d'exploitation;Charges d'exploitation
+6992;Gains de change sur liquidités et titres;Charges d'exploitation;Charges d'exploitation
+7;Résultat des activités annexes;Produits d'exploitation;Produits d'exploitation
+79;Bénéfices provenant de l'aliénation d'actifs immob;Produits d'exploitation;Produits d'exploitation
+791;Bénéfices s/immobilisations;Produits d'exploitation;Produits d'exploitation
+7910;Bénéfices s/ventes d'équipements d'exploitation;Produits d'exploitation;Produits d'exploitation
+7920;Bénéfices s/ventes d'immeubles;Produits d'exploitation;Produits d'exploitation
+8;Résultats except. + hors exploitation;Charges hors exploitation;Charges hors exploitation
+80;Résultat exceptionnel;Charges hors exploitation;Charges hors exploitation
+800;Produits exceptionnels;Charges hors exploitation;Charges hors exploitation
+8002;Réévaluations comptables;Charges hors exploitation;Charges hors exploitation
+8004;Bénéfices exceptionnels s/aliénations actifs immob;Charges hors exploitation;Charges hors exploitation
+8005;Subventions obtenues;Charges hors exploitation;Charges hors exploitation
+8006;Produits pour indemnités pour préjudices;Charges hors exploitation;Charges hors exploitation
+801;Charges exceptionnelles;Charges hors exploitation;Charges hors exploitation
+8011;Dotations exceptionnelles aux provisions;Charges hors exploitation;Charges hors exploitation
+8012;Dotations exceptionnelles aux amortissements;Charges hors exploitation;Charges hors exploitation
+8014;Pertes exceptionnelles s/aliénations actifs immob;Charges hors exploitation;Charges hors exploitation
+8015;Pertes exceptionnelles s/débiteurs;Charges hors exploitation;Charges hors exploitation
+8016;Charges pour indemnités pour préjudices;Charges hors exploitation;Charges hors exploitation
+82;Résultat hors exploitation;Charges hors exploitation;Charges hors exploitation
+850;Produits de l'immeuble hors exploitation;Charges hors exploitation;Charges hors exploitation
+8500;Loyers des locaux;Produits hors exploitation;Produits hors exploitation
+8501;Loyers des appartements;Produits hors exploitation;Produits hors exploitation
+8502;Loyers des garages;Produits hors exploitation;Produits hors exploitation
+8503;Loyer interne;Produits hors exploitation;Produits hors exploitation
+851;Charges de l'immeuble hors exploitation;Charges hors exploitation;Charges hors exploitation
+8510;Intérêts hypothécaires;Charges hors exploitation;Charges hors exploitation
+8511;Entretien d'immeuble;Charges hors exploitation;Charges hors exploitation
+8512;Droits, taxes, impôts fonciers;Charges hors exploitation;Charges hors exploitation
+8513;Primes d'assurance;Charges hors exploitation;Charges hors exploitation
+8514;Eau, eaux usées;Charges hors exploitation;Charges hors exploitation
+8515;Ordures, évacuation des déchets;Charges hors exploitation;Charges hors exploitation
+8516;Charges d'administration;Charges hors exploitation;Charges hors exploitation
+870;Autres produits hors exploitation;Charges hors exploitation;Charges hors exploitation
+8700;Honoraires pour expertises, conférences;Charges hors exploitation;Charges hors exploitation
+8701;Jetons de présence;Charges hors exploitation;Charges hors exploitation
+871;Autres charges hors exploitation;Charges hors exploitation;Charges hors exploitation
+8710;Charges pour des activités hors exploitation;Charges hors exploitation;Charges hors exploitation
+88;Résultat des intérêts minoritaires;Charges hors exploitation;Charges hors exploitation
+89;Impôts directs;Charges hors exploitation;Charges hors exploitation
+890;Impôts directs de l'entreprise;Charges hors exploitation;Charges hors exploitation
+8900;Impôts sur le bénéfice;Charges hors exploitation;Charges hors exploitation
+8901;Impôts sur le capital;Charges hors exploitation;Charges hors exploitation
+8902;Impôts hors exercices;Charges hors exploitation;Charges hors exploitation
+8ÞÞÞ;Bénéfice ou perte de l'exercice;Charges hors exploitation;Charges hors exploitation
+9;Clôture;Clotûre;Clotûre
+90;Bilan;Clotûre;Clotûre
+900;Bilan;Clotûre;Clotûre
+9000;Bilan d'ouverture;Clotûre;Clotûre
+9001;Bilan de clôture;Clotûre;Clotûre
+92;Compte de résultat;Clotûre;Clotûre
+920;Compte de résultat;Clotûre;Clotûre
+9200;Bénéfice / perte de l'exercice;Clotûre;Clotûre
+94;Utilisation du bénéfice;Clotûre;Clotûre
+940;Comptes auxiliaires utilisation du bénéfice;Clotûre;Clotûre
+9400;Participation au bénéfice de l'associé X;Clotûre;Clotûre
+9401;Participation au bénéfice de l'associé Y;Clotûre;Clotûre
+99;Ecriture de regroupements et de corrections;Clotûre;Clotûre
+990;Ecritures de regroupements;Clotûre;Clotûre
+9900;Ecritures de regroupements des débiteurs;Clotûre;Clotûre
+9901;Ecritures de regroupements des créditeurs;Clotûre;Clotûre
+991;Ecritures de corrections;Clotûre;Clotûre
+9910;Ecritures de corrections;Clotûre;Clotûre

@@ -1,0 +1,34 @@
+Numéro	Intitulé	Catégorie	Type
+1000	Caisse	Actif	Bilan
+1020	Banque	Actif	Bilan
+1030	CCP	Actif	Bilan
+1100	Clients	Actif	Bilan
+1170	TVA déductible	Actif	Bilan
+1200	Stocks de marchandises	Actif	Bilan
+1300	Immobilisations corporelles	Actif	Bilan
+1400	Immobilisations incorporelles	Actif	Bilan
+2000	Fournisseurs	Passif	Bilan
+2200	TVA due	Passif	Bilan
+2300	Charges sociales à payer	Passif	Bilan
+2500	Emprunts bancaires	Passif	Bilan
+2800	Capital social	Passif	Bilan
+2900	Résultat de l'exercice	Passif	Bilan
+3000	Ventes de marchandises	Produit	Résultat
+3200	Prestations de services	Produit	Résultat
+3400	Produits financiers	Produit	Résultat
+3800	Autres produits d'exploitation	Produit	Résultat
+4000	Achat de marchandises	Charge	Résultat
+4200	Achat de matières premières	Charge	Résultat
+5000	Charges de personnel	Charge	Résultat
+5700	Charges sociales	Charge	Résultat
+6000	Loyers et charges locatives	Charge	Résultat
+6100	Entretien et réparations	Charge	Résultat
+6200	Assurances	Charge	Résultat
+6300	Fournitures de bureau	Charge	Résultat
+6400	Téléphone et internet	Charge	Résultat
+6500	Frais postaux	Charge	Résultat
+6600	Publicité et marketing	Charge	Résultat
+6700	Déplacements et voyages	Charge	Résultat
+6800	Charges financières	Charge	Résultat
+6900	Amortissements	Charge	Résultat
+7000	Autres charges d'exploitation	Charge	Résultat

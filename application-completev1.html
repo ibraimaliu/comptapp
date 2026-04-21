@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Comptable</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+
+        .menus {
+            position: relative;
+            width: 250px;
+            height: 100vh;
+            background: #222;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .menus ul {
+            position: relative;
+            list-style-type: none;
+        }
+
+        .menus ul li {
+            position: relative;
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: 0.5s;
+        }
+
+        .menus ul li:hover {
+            background: var(--clr);
+        }
+
+        .menus ul li a {
+            position: relative;
+            display: flex;
+            width: 100%;
+            text-decoration: none;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .menus ul li a i {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background: #fff;
+            overflow-y: auto;
+        }
+
+        .content > div {
+            display: none;
+        }
+
+        .content > div.active {
+            display: block;
+        }
+
+        .societePlus, .home-content, .comptabilite-content, .adresses-content, .parametres-content, .recherche-content {
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .societePlus label, .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .societePlus input[type="text"], .societePlus input[type="date"], .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .societePlus input[type="text"]:focus, .societePlus input[type="date"]:focus, .form-group input:focus {
+            border-color: #2483ff;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group label {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #2483ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1a6dcc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Tabs for Comptabilite */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tab:hover, .tab.active {
+            background: #2483ff;
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Search styles */
+        .search-bar {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .search-bar button {
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Dashboard stats */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .stat-card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2483ff;
+        }
+
+        /* Charts container */
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .chart-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="menus">
+        <ul>
+            <li style="--clr:#2483ff;" class="menu-item active" data-target="home">
+                <a href="#home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li style="--clr:#fff200;" class="menu-item" data-target="comptabilite">
+                <a href="#comptabilite">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Comptabilité</span>
+                </a>
+            </li>
+            
+            <li style="--clr:#e7f920bb;" class="menu-item" data-target="adresses">
+                <a href="#adresses">
+                    <i class='fa-solid fa-user'></i>
+                    <span>Adresses - Contacts</span>
+                </a>
+            </li>
+
+            <li style="--clr:#25d366;" class="menu-item" data-target="parametres">
+                <a href="#parametres">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Paramètres</span>
+                </a>
+            </li>
+
+            <li style="--clr:#e70909;" class="menu-item" data-target="recherche">
+                <a href="#recherche">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Recherche</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- Home Section -->
+        <div class="home-content active" id="home">
+            <h1>Tableau de bord</h1>
+            <p>Bienvenue dans votre application de gestion comptable.</p>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Total des revenus</h3>
+                    <p>0.00 CHF</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total des dépenses</h3>
+                    <p>0.00 CHF</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Bénéfice</h3>
+                    <p>0.00 CHF</p>
+                </div>
+                <div class="stat-card">
+                    <h3>TVA à payer</h3>
+                    <p>0.00 CHF</p>
+                </div>
+            </div>
+            
+            <div id="start-setup" style="text-align: center; margin: 50px 0;">
+                <h2>Pour commencer, veuillez configurer votre société</h2>
+                <button id="openSetupBtn">Configurer ma société</button>
+            </div>
+            
+            <div id="dashboard-content" style="display: none;">
+                <h2>Activité récente</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Montant</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-transactions">
+                        <!-- Les transactions récentes seront ajoutées ici -->
+                    </tbody>
+                </table>
+                
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Revenus vs Dépenses</h3>
+                        <div class="chart" id="income-expense-chart">
+                            <!-- Le graphique sera créé ici -->
+                            <p style="text-align: center; padding: 50px 0;">Pas de données disponibles</p>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Répartition des dépenses</h3>
+                        <div class="chart" id="expense-distribution-chart">
+                            <!-- Le graphique sera créé ici -->
+                            <p style="text-align: center; padding: 50px 0;">Pas de données disponibles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comptabilité Section -->
+        <div class="comptabilite-content" id="comptabilite">
+            <h1>Comptabilité</h1>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="transactions">Transactions</div>
+                <div class="tab" data-tab="factures">Factures</div>
+                <div class="tab" data-tab="rapports">Rapports</div>
+                <div class="tab" data-tab="tva">TVA</div>
+            </div>
+            
+            <div class="tab-content active" id="transactions">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Liste des transactions</h2>
+                    <button id="addTransactionBtn">Ajouter une transaction</button>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Montant</th>
+                            <th>Type</th>
+                            <th>Catégorie</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-list">
+                        <!-- Les transactions seront ajoutées ici -->
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Aucune transaction enregistrée</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="tab-content" id="factures">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Liste des factures</h2>
+                    <button id="addInvoiceBtn">Créer une facture</button>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° Facture</th>
+                            <th>Date</th>
+                            <th>Client</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoices-list">
+                        <!-- Les factures seront ajoutées ici -->
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Aucune facture enregistrée</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="tab-content" id="rapports">
+                <h2>Rapports financiers</h2>
+                
+                <div style="margin: 20px 0;">
+                    <label>Période:</label>
+                    <select id="report-period">
+                        <option value="month">Ce mois</option>
+                        <option value="quarter">Ce trimestre</option>
+                        <option value="year">Cette année</option>
+                        <option value="custom">Personnalisé</option>
+                    </select>
+                    
+                    <div id="custom-dates" style="display: none; margin-top: 10px;">
+                        <label>Du:</label>
+                        <input type="date" id="report-start">
+                        <label style="margin-left: 10px;">Au:</label>
+                        <input type="date" id="report-end">
+                    </div>
+                    
+                    <button id="generateReportBtn" style="margin-left: 10px;">Générer</button>
+                </div>
+                
+                <div id="report-result" style="margin-top: 30px;">
+                    <p style="text-align: center;">Sélectionnez une période et générez le rapport</p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="tva">
+                <h2>Gestion de la TVA</h2>
+                
+                <div id="tva-status" style="margin: 20px 0; padding: 15px; background: #f8f8f8; border-radius: 5px;">
+                    <p>Statut TVA: <span id="tva-status-text">Non configuré</span></p>
+                </div>
+                
+                <div>
+                    <h3>Déclaration de TVA</h3>
+                    <div style="margin: 20px 0;">
+                        <label>Période:</label>
+                        <select id="tva-period">
+                            <option value="q1">1er trimestre</option>
+                            <option value="q2">2ème trimestre</option>
+                            <option value="q3">3ème trimestre</option>
+                            <option value="q4">4ème trimestre</option>
+                            <option value="semester1">1er semestre</option>
+                            <option value="semester2">2ème semestre</option>
+                            <option value="year">Année complète</option>
+                        </select>
+                        
+                        <button id="calculateTVABtn" style="margin-left: 10px;">Calculer</button>
+                    </div>
+                    
+                    <div id="tva-result" style="margin-top: 30px;">
+                        <p style="text-align: center;">Sélectionnez une période et calculez la TVA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adresses Section -->
+        <div class="adresses-content" id="adresses">
+            <h1>Adresses et Contacts</h1>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="search-bar">
+                    <input type="text" id="contact-search" placeholder="Rechercher un contact...">
+                    <button id="searchContactBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <button id="addContactBtn">Ajouter un contact</button>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="contacts-list">
+                    <!-- Les contacts seront ajoutés ici -->
+                    <tr>
+                        <td colspan="5" style="text-align: center;">Aucun contact enregistré</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paramètres Section -->
+        <div class="parametres-content" id="parametres">
+            <h1>Paramètres</h1>
+            
+            <div style="margin: 30px 0;">
+                <h2>Informations de la société</h2>
+                <div id="company-info" style="padding: 15px; background: #f8f8f8; border-radius: 5px; margin-top: 15px;">
+                    <p>Nom de la société: <span id="company-name-display">Non configuré</span></p>
+                    <p>Propriétaire: <span id="owner-name-display">Non configuré</span></p>
+                    <p>Période comptable: <span id="accounting-period-display">Non configuré</span></p>
+                    <p>Statut TVA: <span id="tva-status-display">Non configuré</span></p>
+                </div>
+                <button id="editCompanyInfoBtn" style="margin-top: 15px;">Modifier</button>
+            </div>
+            
+            <div style="margin: 30px 0;">
+                <h2>Configuration comptable</h2>
+                
+                <div style="margin: 20px 0;">
+                    <h3>Plan comptable</h3>
+                    <p>Configurez le plan comptable de votre entreprise</p>
+                    <button id="manageAccountingPlanBtn" style="margin-top: 10px;">Gérer le plan comptable</button>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h3>Catégories de dépenses</h3>
+                    <p>Configurez les catégories pour vos dépenses</p>
+                    <button id="manageExpenseCategoriesBtn" style="margin-top: 10px;">Gérer les catégories</button>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h3>Taux TVA</h3>
+                    <p>Configurez les différents taux de TVA</p>
+                    <button id="manageTVARatesBtn" style="margin-top: 10px;">Gérer les taux de TVA</button>
+                </div>
+            </div>
+            
+            <div style="margin: 30px 0;">
+                <h2>Exportation de données</h2>
+                <p>Exportez vos données comptables dans différents formats</p>
+                <button id="exportDataBtn" style="margin-top: 10px;">Exporter les données</button>
+            </div>
+        </div>
+
+        <!-- Recherche Section -->
+        <div class="recherche-content" id="recherche">
+            <h1>Recherche</h1>
+            
+            <div class="search-bar" style="margin: 30px 0;">
+                <input type="text" id="global-search" placeholder="Rechercher dans toute l'application...">
+                <button id="globalSearchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            
+            <div>
+                <h3>Filtrer par:</h3>
+                <div style="margin: 15px 0; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <label><input type="checkbox" name="search-filter" value="transactions" checked> Transactions</label>
+                    <label><input type="checkbox" name="search-filter" value="invoices" checked> Factures</label>
+                    <label><input type="checkbox" name="search-filter" value="contacts" checked> Contacts</label>
+                </div>
+            </div>
+            
+            <div id="search-results" style="margin-top: 30px;">
+                <p style="text-align: center;">Entrez un terme de recherche et lancez la recherche</p>
+            </div>
+        </div>
+
+        <!-- Configuration de société Modal -->
+        <div class="modal" id="societeModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Configuration de votre société</h2>
+                
+                <div class="societePlus">
+                    <label for="societeName">Nom de la société:</label>
+                    <input type="text" id="societeName" name="societeName" placeholder="Nom de votre société">
+                    
+                    <label for="proprioName">Nom du propriétaire:</label>
+                    <input type="text" id="proprioName" name="proprioName" placeholder="Nom du propriétaire">
+                    
+                    <label for="proprioSurname">Prénom du propriétaire:</label>
+                    <input type="text" id="proprioSurname" name="proprioSurname" placeholder="Prénom du propriétaire">
+                    
+                    <label for="beginYear">Choisissez le début et la fin de l'exercice comptable:</label>
+                    
+                    <label for="beginYear">Début de la période</label>
+                    <input type="date" id="beginYear" name="beginYear">
+                    
+                    <label for="endYear">Fin de la période</label>
+                    <input type="date" id="endYear" name="endYear">
+                    
+                    <label>Êtes-vous soumis à la TVA? (Ce paramètre pourra être changé plus tard)</label>
+                    <div class="checkbox-group">
+                        <label for="ouiTVA">Oui</label>
+                        <input type="radio" id="ouiTVA" name="tva" value="oui">
+                        <label for="nonTVA" style="margin-left: 20px;">Non</label>
+                        <input type="radio" id="nonTVA" name="tva" value="non" checked>
+                    </div>
+                    
+                    <button id="addSocieteButton">Valider</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire de transaction Modal -->
+        <div class="modal" id="transactionModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Ajouter une transaction</h2>
+                
+                <div class="form-group">
+                    <label for="transaction-date">Date:</label>
+                    <input type="date" id="transaction-date" name="transaction-date">
+                    
+                    <label for="transaction-description">Description:</label>
+                    <input type="text" id="transaction-description" name="transaction-description" placeholder="Description de la transaction">
+                    
+                    <label for="transaction-amount">Montant:</label>
+                    <input type="number" id="transaction-amount" name="transaction-amount" step="0.01" placeholder="0.00">
+                    
+                    <label for="transaction-type">Type:</label>
+                    <select id="transaction-type" name="transaction-type">
+                        <option value="income">Revenu</option>
+                        <option value="expense">Dépense</option>
+                    </select>
+                    
+                    <label for="transaction-category">Catégorie:</label>
+                    <select id="transaction-category" name="transaction-category">
+                        <option value="none">Sélectionnez une catégorie</option>
+                        <option value="vente">Vente</option>
+                        <option value="prestation">Prestation de service</option>
+                        <option value="materiel">Matériel</option>
+                        <option value="loyer">Loyer</option>
+                        <option value="transport">Transport</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    
+                    <div id="tva-fields" style="margin-top: 15px; display: none;">
+                        <label for="transaction-tva">TVA applicable:</label>
+                        <select id="transaction-tva" name="transaction-tva">
+                            <option value="0">0%</option>
+                            <option value="2.5">2.5%</option>
+                            <option value="3.7">3.7%</option>
+                            <option value="7.7">7.7%</option>
+                        </select>
+                    </div>
+                    
+                    <button id="saveTransactionBtn" style="margin-top: 20px;">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire de facture Modal -->
+        <div class="modal" id="invoiceModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Créer une facture</h2>
+                
+                <div class="form-group">
+                    <label for="invoice-number">N° Facture:</label>
+                    <input type="text" id="invoice-number" name="invoice-number" placeholder="Numéro de facture">
+                    
+                    <label for="invoice-date">Date:</label>
+                    <input type="date" id="invoice-date" name="invoice-date">
+                    
+                    <label for="invoice-client">Client:</label>
+                    <select id="invoice-client" name="invoice-client">
+                        <option value="none">Sélectionnez un client</option>
+                        <!-- Les clients seront ajoutés ici -->
+                    </select>
+                    
+                    <div style="margin: 20px 0;">
+                        <h3>Articles</h3>
+                        <table id="invoice-items">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Quantité</th>
+                                    <th>Prix unitaire</th>
+                                    <th>TVA</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="item-description[]" placeholder="Description"></td>
+                                    <td><input type="number" name="item-quantity[]" value="1" min="1"></td>
+                                    <td><input type="number" name="item-price[]" step="0.01" placeholder="0.00"></td>
+                                    <td>
+                                        <select name="item-tva[]">
+                                            <option value="0">0%</option>
+                                            <option value="2.5">2.5%</option>
+                                            <option value="3.7">3.7%</option>
+                                            <option value="7.7">7.7%</option>
+                                        </select>
+                                    </td>
+                                    <td class="item-total">0.00 CHF</td>
+                                    <td><button class="remove-item" type="button">✕</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button id="addItemBtn" type="button" style="margin-top: 10px;">Ajouter un article</button>
+                    </div>
+                    
+                    <div style="text-align: right; margin: 20px 0;">
+                        <p>Sous-total: <span id="invoice-subtotal">0.00 CHF</span></p>
+                        <p>TVA: <span id="invoice-tva">0.00 CHF</span></p>
+                        <p style="font-weight: bold;">Total: <span id="invoice-total">0.00 CHF</span></p>
+                    </div>
+                    
+                    <button id="saveInvoiceBtn">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire de contact Modal -->
+        <div class="modal" id="contactModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Ajouter un contact</h2>
+                
+                <div class="form-group">
+                    <label for="contact-type">Type:</label>
+                    <select id="contact-type" name="contact-type">
+                        <option value="client">Client</option>
+                        <option value="fournisseur">Fournisseur</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    
+                    <label for="contact-name">Nom/Raison sociale:</label>
+                    <input type="text" id="contact-name" name="contact-name" placeholder="Nom du contact ou raison sociale">
+                    
+                    <label for="contact-email">Email:</label>
+                    <input type="email" id="contact-email" name="contact-email" placeholder="Email">
+                    
+                    <label for="contact-phone">Téléphone:</label>
+                    <input type="tel" id="contact-phone" name="contact-phone" placeholder="Téléphone">
+                    
+                    <label for="contact-address">Adresse:</label>
+                    <input type="text" id="contact-address" name="contact-address" placeholder="Adresse">
+                    
+                    <label for="contact-postal">Code postal:</label>
+                    <input type="text" id="contact-postal" name="contact-postal" placeholder="Code postal">
+                    
+                    <label for="contact-city">Ville:</label>
+                    <input type="text" id="contact-city" name="contact-city" placeholder="Ville">
+                    
+                    <label for="contact-country">Pays:</label>
+                    <input type="text" id="contact-country" name="contact-country" placeholder="Pays" value="Suisse">
+                    
+                    <button id="saveContactBtn" style="margin-top: 20px;">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables pour stocker les données de l'application
+        let companyData = null;
+        let transactions = [];
+        let invoices = [];
+        let contacts = [];
+        
+        // Initialisation de l'application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestion du menu
+            const menuItems = document.querySelectorAll('.menu-item');
+            const contentSections = document.querySelectorAll('.content > div');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    
+                    // Désactiver tous les liens et sections
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    
+                    // Activer le lien et la section correspondante
+                    this.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            // Gestion des onglets dans la section Comptabilité
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.getAttribute('data-tab');
+                    
+                    // Désactiver tous les onglets et contenus
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Activer l'onglet et le contenu correspondant
+                    this.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            // Gestion de la période des rapports
+            const reportPeriod = document.getElementById('report-period');
+            const customDates = document.getElementById('custom-dates');
+            
+            reportPeriod.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customDates.style.display = 'block';
+                } else {
+                    customDates.style.display = 'none';
+                }
+            });
+            
+            // Vérifier si une société est déjà configurée
+            loadCompanyData();
+            
+            // Configuration de la société
+            const openSetupBtn = document.getElementById('openSetupBtn');
+            const societeModal = document.getElementById('societeModal');
+            const closeModalBtns = document.querySelectorAll('.close');
+            
+            openSetupBtn.addEventListener('click', function() {
+                societeModal.style.display = 'flex';
+            });
+            
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    modal.style.display = 'none';
+                });
+            });
+            
+            // Enregistrement des données de la société
+            const addSocieteButton = document.getElementById('addSocieteButton');
+            
+            addSocieteButton.addEventListener('click', function() {
+                const societeName = document.getElementById('societeName').value;
+                const proprioName = document.getElementById('proprioName').value;
+                const proprioSurname = document.getElementById('proprioSurname').value;
+                const beginYear = document.getElementById('beginYear').value;
+                const endYear = document.getElementById('endYear').value;
+                const tva = document.querySelector('input[name="tva"]:checked').value;
+                
+                if (!societeName || !proprioName || !proprioSurname || !beginYear || !endYear) {
+                    alert('Veuillez remplir tous les champs obligatoires');
+                    return;
+                }
+                
+                companyData = {
+                    name: societeName,
+                    ownerName: proprioName,
+                    ownerSurname: proprioSurname,
+                    beginYear: beginYear,
+                    endYear: endYear,
+                    tva: tva
+                };
+                
+                // Enregistrer les données localement
+                localStorage.setItem('companyData', JSON.stringify(companyData));
+                
+                // Mettre à jour l'affichage
+                updateCompanyInfo();
+                
+                // Fermer le modal
+                societeModal.style.display = 'none';
+                
+                // Afficher le tableau de bord
+                document.getElementById('start-setup').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'block';
+            });
+            
+            // Gestion des transactions
+            const addTransactionBtn = document.getElementById('addTransactionBtn');
+            const transactionModal = document.getElementById('transactionModal');
+            const saveTransactionBtn = document.getElementById('saveTransactionBtn');
+            
+            addTransactionBtn.addEventListener('click', function() {
+                // Réinitialiser le formulaire
+                document.getElementById('transaction-date').value = new Date().toISOString().slice(0, 10);
+                document.getElementById('transaction-description').value = '';
+                document.getElementById('transaction-amount').value = '';
+                document.getElementById('transaction-type').value = 'income';
+                document.getElementById('transaction-category').value = 'none';
+                
+                // Afficher le modal
+                transactionModal.style.display = 'flex';
+                
+                // Mettre à jour l'affichage des champs TVA
+                updateTVAFields();
+            });
+            
+            // Afficher/masquer les champs TVA en fonction du statut TVA
+            document.getElementById('transaction-type').addEventListener('change', updateTVAFields);
+            
+            function updateTVAFields() {
+                const transactionType = document.getElementById('transaction-type').value;
+                const tvaFields = document.getElementById('tva-fields');
+                
+                // Vérifier si la société est soumise à la TVA
+                if (companyData && companyData.tva === 'oui') {
+                    tvaFields.style.display = 'block';
+                } else {
+                    tvaFields.style.display = 'none';
+                }
+            }
+            
+            saveTransactionBtn.addEventListener('click', function() {
+                const date = document.getElementById('transaction-date').value;
+                const description = document.getElementById('transaction-description').value;
+                const amount = parseFloat(document.getElementById('transaction-amount').value);
+                const type = document.getElementById('transaction-type').value;
+                const category = document.getElementById('transaction-category').value;
+                const tva = document.getElementById('transaction-tva') ? document.getElementById('transaction-tva').value : '0';
+                
+                if (!date || !description || isNaN(amount) || amount <= 0 || category === 'none') {
+                    alert('Veuillez remplir tous les champs obligatoires avec des valeurs valides');
+                    return;
+                }
+                
+                const transaction = {
+                    id: Date.now(),
+                    date: date,
+                    description: description,
+                    amount: amount,
+                    type: type,
+                    category: category,
+                    tva: tva
+                };
+                
+                // Ajouter la transaction à la liste
+                transactions.unshift(transaction);
+                
+                // Enregistrer les transactions localement
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+                
+                // Mettre à jour l'affichage
+                updateTransactionsList();
+                updateRecentTransactions();
+                updateDashboardStats();
+                
+                // Fermer le modal
+                transactionModal.style.display = 'none';
+            });
+            
+            // Gestion des factures
+            const addInvoiceBtn = document.getElementById('addInvoiceBtn');
+            const invoiceModal = document.getElementById('invoiceModal');
+            const saveInvoiceBtn = document.getElementById('saveInvoiceBtn');
+            const addItemBtn = document.getElementById('addItemBtn');
+            
+            addInvoiceBtn.addEventListener('click', function() {
+                // Réinitialiser le formulaire
+                document.getElementById('invoice-number').value = generateInvoiceNumber();
+                document.getElementById('invoice-date').value = new Date().toISOString().slice(0, 10);
+                document.getElementById('invoice-client').value = 'none';
+                
+                // Réinitialiser la table des articles
+                const invoiceItemsTable = document.getElementById('invoice-items').querySelector('tbody');
+                invoiceItemsTable.innerHTML = `
+                    <tr>
+                        <td><input type="text" name="item-description[]" placeholder="Description"></td>
+                        <td><input type="number" name="item-quantity[]" value="1" min="1"></td>
+                        <td><input type="number" name="item-price[]" step="0.01" placeholder="0.00"></td>
+                        <td>
+                            <select name="item-tva[]">
+                                <option value="0">0%</option>
+                                <option value="2.5">2.5%</option>
+                                <option value="3.7">3.7%</option>
+                                <option value="7.7">7.7%</option>
+                            </select>
+                        </td>
+                        <td class="item-total">0.00 CHF</td>
+                        <td><button class="remove-item" type="button">✕</button></td>
+                    </tr>
+                `;
+                
+                // Mettre à jour les totaux
+                updateInvoiceTotals();
+                
+                // Mettre à jour la liste des clients
+                updateClientSelect();
+                
+                // Afficher le modal
+                invoiceModal.style.display = 'flex';
+            });
+            
+            // Ajouter un nouvel article à la facture
+            addItemBtn.addEventListener('click', function() {
+                const invoiceItemsTable = document.getElementById('invoice-items').querySelector('tbody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td><input type="text" name="item-description[]" placeholder="Description"></td>
+                    <td><input type="number" name="item-quantity[]" value="1" min="1"></td>
+                    <td><input type="number" name="item-price[]" step="0.01" placeholder="0.00"></td>
+                    <td>
+                        <select name="item-tva[]">
+                            <option value="0">0%</option>
+                            <option value="2.5">2.5%</option>
+                            <option value="3.7">3.7%</option>
+                            <option value="7.7">7.7%</option>
+                        </select>
+                    </td>
+                    <td class="item-total">0.00 CHF</td>
+                    <td><button class="remove-item" type="button">✕</button></td>
+                `;
+                
+                invoiceItemsTable.appendChild(newRow);
+                
+                // Ajouter des écouteurs d'événements pour les calculs
+                addInvoiceItemListeners(newRow);
+            });
+            
+            // Délégation d'événement pour la suppression d'articles
+            document.getElementById('invoice-items').addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-item')) {
+                    const row = event.target.closest('tr');
+                    const rows = document.getElementById('invoice-items').querySelectorAll('tbody tr');
+                    
+                    // Ne pas supprimer la dernière ligne
+                    if (rows.length > 1) {
+                        row.remove();
+                        updateInvoiceTotals();
+                    }
+                }
+            });
+            
+            // Ajouter des écouteurs d'événements pour les calculs de facture
+            function addInvoiceItemListeners(row) {
+                const quantityInput = row.querySelector('input[name="item-quantity[]"]');
+                const priceInput = row.querySelector('input[name="item-price[]"]');
+                const tvaSelect = row.querySelector('select[name="item-tva[]"]');
+                
+                [quantityInput, priceInput, tvaSelect].forEach(input => {
+                    input.addEventListener('input', updateInvoiceTotals);
+                });
+            }
+            
+            // Mettre à jour les totaux de la facture
+            function updateInvoiceTotals() {
+                const rows = document.getElementById('invoice-items').querySelectorAll('tbody tr');
+                let subtotal = 0;
+                let tvaTotal = 0;
+                
+                rows.forEach(row => {
+                    const quantity = parseInt(row.querySelector('input[name="item-quantity[]"]').value) || 0;
+                    const price = parseFloat(row.querySelector('input[name="item-price[]"]').value) || 0;
+                    const tvaRate = parseFloat(row.querySelector('select[name="item-tva[]"]').value) || 0;
+                    
+                    const rowTotal = quantity * price;
+                    const rowTva = rowTotal * (tvaRate / 100);
+                    
+                    subtotal += rowTotal;
+                    tvaTotal += rowTva;
+                    
+                    row.querySelector('.item-total').textContent = rowTotal.toFixed(2) + ' CHF';
+                });
+                
+                const total = subtotal + tvaTotal;
+                
+                document.getElementById('invoice-subtotal').textContent = subtotal.toFixed(2) + ' CHF';
+                document.getElementById('invoice-tva').textContent = tvaTotal.toFixed(2) + ' CHF';
+                document.getElementById('invoice-total').textContent = total.toFixed(2) + ' CHF';
+            }
+            
+            // Générer un numéro de facture unique
+            function generateInvoiceNumber() {
+                const year = new Date().getFullYear();
+                const prefix = 'FACT-' + year + '-';
+                const lastInvoice = invoices.find(inv => inv.number.startsWith(prefix));
+                
+                let number = 1;
+                if (lastInvoice) {
+                    const lastNumber = parseInt(lastInvoice.number.split('-').pop());
+                    number = lastNumber + 1;
+                }
+                
+                return prefix + number.toString().padStart(3, '0');
+            }
+            
+            // Mettre à jour la sélection des clients
+            function updateClientSelect() {
+                const clientSelect = document.getElementById('invoice-client');
+                const clients = contacts.filter(contact => contact.type === 'client');
+                
+                // Réinitialiser la sélection
+                clientSelect.innerHTML = '<option value="none">Sélectionnez un client</option>';
+                
+                // Ajouter les clients
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.id;
+                    option.textContent = client.name;
+                    clientSelect.appendChild(option);
+                });
+            }
+            
+            saveInvoiceBtn.addEventListener('click', function() {
+                const number = document.getElementById('invoice-number').value;
+                const date = document.getElementById('invoice-date').value;
+                const clientId = document.getElementById('invoice-client').value;
+                
+                if (!number || !date || clientId === 'none') {
+                    alert('Veuillez remplir tous les champs obligatoires');
+                    return;
+                }
+                
+                // Récupérer les articles
+                const rows = document.getElementById('invoice-items').querySelectorAll('tbody tr');
+                const items = [];
+                
+                rows.forEach(row => {
+                    const description = row.querySelector('input[name="item-description[]"]').value;
+                    const quantity = parseInt(row.querySelector('input[name="item-quantity[]"]').value) || 0;
+                    const price = parseFloat(row.querySelector('input[name="item-price[]"]').value) || 0;
+                    const tva = parseFloat(row.querySelector('select[name="item-tva[]"]').value) || 0;
+                    
+                    if (description && quantity > 0 && price > 0) {
+                        items.push({
+                            description: description,
+                            quantity: quantity,
+                            price: price,
+                            tva: tva,
+                            total: quantity * price,
+                            tvaAmount: quantity * price * (tva / 100)
+                        });
+                    }
+                });
+                
+                if (items.length === 0) {
+                    alert('Veuillez ajouter au moins un article à la facture');
+                    return;
+                }
+                
+                // Calculer les totaux
+                const subtotal = items.reduce((sum, item) => sum + item.total, 0);
+                const tvaTotal = items.reduce((sum, item) => sum + item.tvaAmount, 0);
+                const total = subtotal + tvaTotal;
+                
+                // Créer la facture
+                const invoice = {
+                    id: Date.now(),
+                    number: number,
+                    date: date,
+                    clientId: clientId,
+                    client: contacts.find(contact => contact.id == clientId).name,
+                    items: items,
+                    subtotal: subtotal,
+                    tva: tvaTotal,
+                    total: total,
+                    status: 'en attente'
+                };
+                
+                // Ajouter la facture à la liste
+                invoices.unshift(invoice);
+                
+                // Enregistrer les factures localement
+                localStorage.setItem('invoices', JSON.stringify(invoices));
+                
+                // Mettre à jour l'affichage
+                updateInvoicesList();
+                
+                // Fermer le modal
+                invoiceModal.style.display = 'none';
+            });
+            
+            // Gestion des contacts
+            const addContactBtn = document.getElementById('addContactBtn');
+            const contactModal = document.getElementById('contactModal');
+            const saveContactBtn = document.getElementById('saveContactBtn');
+            
+            addContactBtn.addEventListener('click', function() {
+                // Réinitialiser le formulaire
+                document.getElementById('contact-type').value = 'client';
+                document.getElementById('contact-name').value = '';
+                document.getElementById('contact-email').value = '';
+                document.getElementById('contact-phone').value = '';
+                document.getElementById('contact-address').value = '';
+                document.getElementById('contact-postal').value = '';
+                document.getElementById('contact-city').value = '';
+                document.getElementById('contact-country').value = 'Suisse';
+                
+                // Afficher le modal
+                contactModal.style.display = 'flex';
+            });
+            
+            saveContactBtn.addEventListener('click', function() {
+                const type = document.getElementById('contact-type').value;
+                const name = document.getElementById('contact-name').value;
+                const email = document.getElementById('contact-email').value;
+                const phone = document.getElementById('contact-phone').value;
+                const address = document.getElementById('contact-address').value;
+                const postal = document.getElementById('contact-postal').value;
+                const city = document.getElementById('contact-city').value;
+                const country = document.getElementById('contact-country').value;
+                
+                if (!name) {
+                    alert('Veuillez saisir au moins le nom du contact');
+                    return;
+                }
+                
+                const contact = {
+                    id: Date.now(),
+                    type: type,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    postal: postal,
+                    city: city,
+                    country: country
+                };
+                
+                // Ajouter le contact à la liste
+                contacts.unshift(contact);
+                
+                // Enregistrer les contacts localement
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                
+                // Mettre à jour l'affichage
+                updateContactsList();
+                
+                // Fermer le modal
+                contactModal.style.display = 'none';
+            });
+            
+            // Paramètres
+            const editCompanyInfoBtn = document.getElementById('editCompanyInfoBtn');
+            
+            editCompanyInfoBtn.addEventListener('click', function() {
+                if (companyData) {
+                    // Pré-remplir le formulaire avec les données existantes
+                    document.getElementById('societeName').value = companyData.name;
+                    document.getElementById('proprioName').value = companyData.ownerName;
+                    document.getElementById('proprioSurname').value = companyData.ownerSurname;
+                    document.getElementById('beginYear').value = companyData.beginYear;
+                    document.getElementById('endYear').value = companyData.endYear;
+                    
+                    if (companyData.tva === 'oui') {
+                        document.getElementById('ouiTVA').checked = true;
+                    } else {
+                        document.getElementById('nonTVA').checked = true;
+                    }
+                }
+                
+                // Afficher le modal
+                societeModal.style.display = 'flex';
+            });
+            
+            // Recherche
+            const globalSearchBtn = document.getElementById('globalSearchBtn');
+            const searchInput = document.getElementById('global-search');
+            const searchResults = document.getElementById('search-results');
+            
+            globalSearchBtn.addEventListener('click', function() {
+                const query = searchInput.value.trim().toLowerCase();
+                
+                if (!query) {
+                    searchResults.innerHTML = '<p style="text-align: center;">Entrez un terme de recherche et lancez la recherche</p>';
+                    return;
+                }
+                
+                // Récupérer les filtres
+                const filters = Array.from(document.querySelectorAll('input[name="search-filter"]:checked')).map(input => input.value);
+                
+                // Rechercher dans les transactions
+                let transactionResults = [];
+                if (filters.includes('transactions')) {
+                    transactionResults = transactions.filter(transaction => 
+                        transaction.description.toLowerCase().includes(query) ||
+                        transaction.category.toLowerCase().includes(query)
+                    );
+                }
+                
+                // Rechercher dans les factures
+                let invoiceResults = [];
+                if (filters.includes('invoices')) {
+                    invoiceResults = invoices.filter(invoice => 
+                        invoice.number.toLowerCase().includes(query) ||
+                        invoice.client.toLowerCase().includes(query) ||
+                        invoice.items.some(item => item.description.toLowerCase().includes(query))
+                    );
+                }
+                
+                // Rechercher dans les contacts
+                let contactResults = [];
+                if (filters.includes('contacts')) {
+                    contactResults = contacts.filter(contact => 
+                        contact.name.toLowerCase().includes(query) ||
+                        (contact.email && contact.email.toLowerCase().includes(query)) ||
+                        (contact.phone && contact.phone.includes(query)) ||
+                        (contact.address && contact.address.toLowerCase().includes(query)) ||
+                        (contact.city && contact.city.toLowerCase().includes(query))
+                    );
+                }
+                
+                // Afficher les résultats
+                let resultsHTML = '';
+                
+                if (transactionResults.length > 0) {
+                    resultsHTML += '<h3>Transactions</h3><ul>';
+                    transactionResults.forEach(transaction => {
+                        resultsHTML += `<li>
+                            <strong>${transaction.date}</strong> - ${transaction.description} 
+                            (${transaction.amount.toFixed(2)} CHF - ${transaction.type === 'income' ? 'Revenu' : 'Dépense'})
+                        </li>`;
+                    });
+                    resultsHTML += '</ul>';
+                }
+                
+                if (invoiceResults.length > 0) {
+                    resultsHTML += '<h3>Factures</h3><ul>';
+                    invoiceResults.forEach(invoice => {
+                        resultsHTML += `<li>
+                            <strong>${invoice.number}</strong> - ${invoice.date} 
+                            (${invoice.client} - ${invoice.total.toFixed(2)} CHF)
+                        </li>`;
+                    });
+                    resultsHTML += '</ul>';
+                }
+                
+                if (contactResults.length > 0) {
+                    resultsHTML += '<h3>Contacts</h3><ul>';
+                    contactResults.forEach(contact => {
+                        resultsHTML += `<li>
+                            <strong>${contact.name}</strong> - ${contact.type} 
+                            (${contact.email || 'Pas d\'email'} - ${contact.phone || 'Pas de téléphone'})
+                        </li>`;
+                    });
+                    resultsHTML += '</ul>';
+                }
+                
+                if (resultsHTML === '') {
+                    resultsHTML = '<p style="text-align: center;">Aucun résultat trouvé pour votre recherche</p>';
+                }
+                
+                searchResults.innerHTML = resultsHTML;
+            });
+            
+            // Charger les données de l'application
+            loadAppData();
+        });
+        
+        // Fonctions utilitaires
+        function loadCompanyData() {
+            const data = localStorage.getItem('companyData');
+            
+            if (data) {
+                companyData = JSON.parse(data);
+                updateCompanyInfo();
+                
+                // Afficher le tableau de bord
+                document.getElementById('start-setup').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'block';
+            }
+        }
+        
+        function updateCompanyInfo() {
+            if (!companyData) return;
+            
+            // Mettre à jour l'affichage des informations de la société
+            document.getElementById('company-name-display').textContent = companyData.name;
+            document.getElementById('owner-name-display').textContent = `${companyData.ownerSurname} ${companyData.ownerName}`;
+            document.getElementById('accounting-period-display').textContent = `${formatDate(companyData.beginYear)} - ${formatDate(companyData.endYear)}`;
+            document.getElementById('tva-status-display').textContent = companyData.tva === 'oui' ? 'Soumis à la TVA' : 'Non soumis à la TVA';
+            
+            // Mettre à jour le statut TVA dans la section TVA
+            document.getElementById('tva-status-text').textContent = companyData.tva === 'oui' ? 'Soumis à la TVA' : 'Non soumis à la TVA';
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-CH');
+        }
+        
+        function loadAppData() {
+            // Charger les transactions
+            const transactionsData = localStorage.getItem('transactions');
+            if (transactionsData) {
+                transactions = JSON.parse(transactionsData);
+                updateTransactionsList();
+                updateRecentTransactions();
+            }
+            
+            // Charger les factures
+            const invoicesData = localStorage.getItem('invoices');
+            if (invoicesData) {
+                invoices = JSON.parse(invoicesData);
+                updateInvoicesList();
+            }
+            
+            // Charger les contacts
+            const contactsData = localStorage.getItem('contacts');
+            if (contactsData) {
+                contacts = JSON.parse(contactsData);
+                updateContactsList();
+            }
+            
+            // Mettre à jour les statistiques du tableau de bord
+            updateDashboardStats();
+        }
+        
+        function updateTransactionsList() {
+            const transactionsList = document.getElementById('transactions-list');
+            
+            if (transactions.length === 0) {
+                transactionsList.innerHTML = '<tr><td colspan="6" style="text-align: center;">Aucune transaction enregistrée</td></tr>';
+                return;
+            }
+            
+            let html = '';
+            transactions.forEach(transaction => {
+                html += `
+                    <tr>
+                        <td>${formatDate(transaction.date)}</td>
+                        <td>${transaction.description}</td>
+                        <td>${transaction.amount.toFixed(2)} CHF</td>
+                        <td>${transaction.type === 'income' ? 'Revenu' : 'Dépense'}</td>
+                        <td>${transaction.category}</td>
+                        <td>
+                            <button onclick="editTransaction(${transaction.id})">✏️</button>
+                            <button onclick="deleteTransaction(${transaction.id})">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            transactionsList.innerHTML = html;
+        }
+        
+        function updateInvoicesList() {
+            const invoicesList = document.getElementById('invoices-list');
+            
+            if (invoices.length === 0) {
+                invoicesList.innerHTML = '<tr><td colspan="6" style="text-align: center;">Aucune facture enregistrée</td></tr>';
+                return;
+            }
+            
+            let html = '';
+            invoices.forEach(invoice => {
+                html += `
+                    <tr>
+                        <td>${invoice.number}</td>
+                        <td>${formatDate(invoice.date)}</td>
+                        <td>${invoice.client}</td>
+                        <td>${invoice.total.toFixed(2)} CHF</td>
+                        <td>${invoice.status}</td>
+                        <td>
+                            <button onclick="viewInvoice(${invoice.id})">👁️</button>
+                            <button onclick="editInvoice(${invoice.id})">✏️</button>
+                            <button onclick="deleteInvoice(${invoice.id})">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            invoicesList.innerHTML = html;
+        }
+        
+        function updateContactsList() {
+            const contactsList = document.getElementById('contacts-list');
+            
+            if (contacts.length === 0) {
+                contactsList.innerHTML = '<tr><td colspan="5" style="text-align: center;">Aucun contact enregistré</td></tr>';
+                return;
+            }
+            
+            let html = '';
+            contacts.forEach(contact => {
+                html += `
+                    <tr>
+                        <td>${contact.name}</td>
+                        <td>${contact.type === 'client' ? 'Client' : contact.type === 'fournisseur' ? 'Fournisseur' : 'Autre'}</td>
+                        <td>${contact.email || '-'}</td>
+                        <td>${contact.phone || '-'}</td>
+                        <td>
+                            <button onclick="viewContact(${contact.id})">👁️</button>
+                            <button onclick="editContact(${contact.id})">✏️</button>
+                            <button onclick="deleteContact(${contact.id})">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            contactsList.innerHTML = html;
+        }
+        
+        function updateRecentTransactions() {
+            const recentTransactionsList = document.getElementById('recent-transactions');
+            
+            if (transactions.length === 0) {
+                recentTransactionsList.innerHTML = '<tr><td colspan="4" style="text-align: center;">Aucune transaction enregistrée</td></tr>';
+                return;
+            }
+            
+            // Afficher les 5 transactions les plus récentes
+            const recentTransactions = transactions.slice(0, 5);
+            
+            let html = '';
+            recentTransactions.forEach(transaction => {
+                html += `
+                    <tr>
+                        <td>${formatDate(transaction.date)}</td>
+                        <td>${transaction.description}</td>
+                        <td>${transaction.amount.toFixed(2)} CHF</td>
+                        <td>${transaction.type === 'income' ? 'Revenu' : 'Dépense'}</td>
+                    </tr>
+                `;
+            });
+            
+            recentTransactionsList.innerHTML = html;
+        }
+        
+        function updateDashboardStats() {
+            if (transactions.length === 0) return;
+            
+            // Calculer les totaux
+            const totalIncome = transactions
+                .filter(transaction => transaction.type === 'income')
+                .reduce((sum, transaction) => sum + transaction.amount, 0);
+            
+            const totalExpenses = transactions
+                .filter(transaction => transaction.type === 'expense')
+                .reduce((sum, transaction) => sum + transaction.amount, 0);
+            
+            const profit = totalIncome - totalExpenses;
+            
+            // Calculer la TVA si applicable
+            let totalTVA = 0;
+            if (companyData && companyData.tva === 'oui') {
+                // Calculer la TVA sur les ventes (débit)
+                const salesTVA = transactions
+                    .filter(transaction => transaction.type === 'income')
+                    .reduce((sum, transaction) => {
+                        const tvaRate = parseFloat(transaction.tva) || 0;
+                        return sum + (transaction.amount * (tvaRate / 100));
+                    }, 0);
+                
+                // Calculer la TVA sur les achats (crédit)
+                const purchasesTVA = transactions
+                    .filter(transaction => transaction.type === 'expense')
+                    .reduce((sum, transaction) => {
+                        const tvaRate = parseFloat(transaction.tva) || 0;
+                        return sum + (transaction.amount * (tvaRate / 100));
+                    }, 0);
+                
+                // TVA à payer = TVA sur ventes - TVA sur achats
+                totalTVA = salesTVA - purchasesTVA;
+            }
+            
+            // Mettre à jour l'affichage
+            document.querySelector('.stat-card:nth-child(1) p').textContent = totalIncome.toFixed(2) + ' CHF';
+            document.querySelector('.stat-card:nth-child(2) p').textContent = totalExpenses.toFixed(2) + ' CHF';
+            document.querySelector('.stat-card:nth-child(3) p').textContent = profit.toFixed(2) + ' CHF';
+            document.querySelector('.stat-card:nth-child(4) p').textContent = totalTVA.toFixed(2) + ' CHF';
+        }
+        
+        // Fonctions pour les actions sur les éléments (à implémenter)
+        function editTransaction(id) {
+            alert('Fonctionnalité d\'édition de transaction non implémentée');
+        }
+        
+        function deleteTransaction(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette transaction ?')) {
+                // Supprimer la transaction
+                transactions = transactions.filter(transaction => transaction.id !== id);
+                
+                // Enregistrer les transactions
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+                
+                // Mettre à jour l'affichage
+                updateTransactionsList();
+                updateRecentTransactions();
+                updateDashboardStats();
+            }
+        }
+        
+        function viewInvoice(id) {
+            alert('Fonctionnalité de visualisation de facture non implémentée');
+        }
+        
+        function editInvoice(id) {
+            alert('Fonctionnalité d\'édition de facture non implémentée');
+        }
+        
+        function deleteInvoice(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette facture ?')) {
+                // Supprimer la facture
+                invoices = invoices.filter(invoice => invoice.id !== id);
+                
+                // Enregistrer les factures
+                localStorage.setItem('invoices', JSON.stringify(invoices));
+                
+                // Mettre à jour l'affichage
+                updateInvoicesList();
+            }
+        }
+        
+        function viewContact(id) {
+            alert('Fonctionnalité de visualisation de contact non implémentée');
+        }
+        
+        function editContact(id) {
+            alert('Fonctionnalité d\'édition de contact non implémentée');
+        }
+        
+        function deleteContact(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce contact ?')) {
+                // Supprimer le contact
+                contacts = contacts.filter(contact => contact.id !== id);
+                
+                // Enregistrer les contacts
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                
+                // Mettre à jour l'affichage
+                updateContactsList();
+            }
+        }
+    </script>
+</body>
+</html>

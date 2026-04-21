@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Menu Facturation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script>
+        function toggleSubmenu(event, element) {
+            console.log('toggleSubmenu appelé');
+
+            // Empêcher le comportement par défaut du lien
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            // Trouver le parent li avec la classe has-submenu
+            let parentLi = element;
+            while (parentLi && !parentLi.classList.contains('has-submenu')) {
+                parentLi = parentLi.parentElement;
+            }
+
+            if (!parentLi) {
+                console.error('Parent .has-submenu non trouvé');
+                return false;
+            }
+
+            console.log('Parent trouvé:', parentLi);
+
+            // Vérifier l'état actuel
+            const isOpen = parentLi.classList.contains('submenu-open');
+            console.log('Menu ouvert?', isOpen);
+
+            // Fermer tous les autres sous-menus (comportement accordéon)
+            const allSubmenus = document.querySelectorAll('.has-submenu');
+            for (let i = 0; i < allSubmenus.length; i++) {
+                if (allSubmenus[i] !== parentLi) {
+                    allSubmenus[i].classList.remove('submenu-open');
+                }
+            }
+
+            // Basculer l'état du sous-menu actuel
+            if (isOpen) {
+                console.log('Fermeture du menu');
+                parentLi.classList.remove('submenu-open');
+            } else {
+                console.log('Ouverture du menu');
+                parentLi.classList.add('submenu-open');
+            }
+
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <div class="menus">
+        <ul>
+            <li style="--clr:#2483ff;" class="menu-item active" data-target="home">
+                <a href="#home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <!-- Facturation avec sous-menu -->
+            <li style="--clr:#38ef7d;" class="menu-item has-submenu" data-target="facturation">
+                <a href="#" onclick="toggleSubmenu(event, this); return false;">
+                    <i class='fa-solid fa-file-invoice'></i>
+                    <span>Facturation</span>
+                    <i class='fa-solid fa-chevron-down submenu-arrow'></i>
+                </a>
+                <ul class="submenu">
+                    <li class="submenu-item">
+                        <a href="#devis">
+                            <i class='fa-solid fa-file-alt'></i>
+                            <span>Devis</span>
+                        </a>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#factures">
+                            <i class='fa-solid fa-file-invoice'></i>
+                            <span>Factures</span>
+                        </a>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#rapprochement">
+                            <i class='fa-solid fa-sync-alt'></i>
+                            <span>Rapprochement</span>
+                        </a>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#rappels">
+                            <i class='fa-solid fa-bell'></i>
+                            <span>Rappels</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li style="--clr:#25d366;" class="menu-item" data-target="parametres">
+                <a href="#parametres">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Paramètres</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Test du Menu Facturation</h1>
+        <p>Cliquez sur "Facturation" dans le menu de gauche pour tester le déploiement/rétraction du sous-menu.</p>
+        <p>Ouvrez la console JavaScript (F12) pour voir les logs de débogage.</p>
+
+        <h2>État attendu:</h2>
+        <ul>
+            <li>✅ Au clic sur "Facturation", le sous-menu doit apparaître avec animation</li>
+            <li>✅ La flèche doit tourner de 180°</li>
+            <li>✅ Au deuxième clic, le sous-menu doit se fermer</li>
+            <li>✅ Les 4 sous-items (Devis, Factures, Rapprochement, Rappels) doivent être visibles</li>
+        </ul>
+    </div>
+</body>
+</html>

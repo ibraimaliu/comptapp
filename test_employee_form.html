@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Formulaire Employé</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/employees.css">
+    <style>
+        body { padding: 20px; background: #f5f5f5; }
+        .test-container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        .debug-console { background: #1e1e1e; color: #00ff00; padding: 15px; border-radius: 4px; margin-top: 20px; font-family: monospace; max-height: 300px; overflow-y: auto; }
+        .debug-console div { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test Formulaire Employé</h1>
+        <p>Ce formulaire teste la fonction saveEmployee() avec console de débogage intégrée</p>
+
+        <form id="employee-form">
+            <input type="hidden" id="employee-id" name="id" value="">
+
+            <h3>Informations de base</h3>
+            <div class="form-row">
+                <div class="form-group required">
+                    <label>Prénom *</label>
+                    <input type="text" id="first-name" name="first_name" value="Jean" required>
+                </div>
+                <div class="form-group required">
+                    <label>Nom *</label>
+                    <input type="text" id="last-name" name="last_name" value="Dupont" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" name="email" value="jean.dupont@test.ch">
+                </div>
+                <div class="form-group">
+                    <label>Téléphone</label>
+                    <input type="tel" id="phone" name="phone" value="0791234567">
+                </div>
+            </div>
+
+            <h3>Contrat</h3>
+            <div class="form-row">
+                <div class="form-group required">
+                    <label>Date d'embauche *</label>
+                    <input type="date" id="hire-date" name="hire_date" value="2024-01-15" required>
+                </div>
+                <div class="form-group">
+                    <label>Date de fin</label>
+                    <input type="date" id="termination-date" name="termination_date" value="">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group required">
+                    <label>Poste *</label>
+                    <input type="text" id="job-title" name="job_title" value="Développeur" required>
+                </div>
+                <div class="form-group">
+                    <label>Département</label>
+                    <input type="text" id="department" name="department" value="IT">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Type d'emploi</label>
+                    <select id="employment-type" name="employment_type">
+                        <option value="full_time" selected>Temps plein</option>
+                        <option value="part_time">Temps partiel</option>
+                        <option value="contractor">Contractuel</option>
+                        <option value="intern">Stagiaire</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Type de contrat</label>
+                    <select id="contract-type" name="contract_type">
+                        <option value="cdi" selected>CDI</option>
+                        <option value="cdd">CDD</option>
+                        <option value="temporary">Temporaire</option>
+                        <option value="apprentice">Apprentissage</option>
+                    </select>
+                </div>
+            </div>
+
+            <h3>Salaire</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Type de salaire</label>
+                    <select id="salary-type" name="salary_type">
+                        <option value="monthly" selected>Mensuel</option>
+                        <option value="hourly">Horaire</option>
+                        <option value="annual">Annuel</option>
+                    </select>
+                </div>
+                <div class="form-group required">
+                    <label>Salaire de base *</label>
+                    <input type="number" id="base-salary" name="base_salary" step="0.01" value="5000" required>
+                </div>
+                <div class="form-group">
+                    <label>Devise</label>
+                    <select id="currency" name="currency">
+                        <option value="CHF" selected>CHF</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Heures par semaine</label>
+                    <input type="number" id="hours-per-week" name="hours_per_week" step="0.5" value="40">
+                </div>
+            </div>
+
+            <!-- Champs supplémentaires cachés mais présents -->
+            <input type="text" id="employee-number" name="employee_number" value="" style="display:none;">
+            <input type="text" id="address" name="address" value="" style="display:none;">
+            <input type="text" id="postal-code" name="postal_code" value="" style="display:none;">
+            <input type="text" id="city" name="city" value="" style="display:none;">
+            <input type="text" id="country" name="country" value="Suisse" style="display:none;">
+            <input type="text" id="avs-number" name="avs_number" value="" style="display:none;">
+            <input type="text" id="accident-insurance" name="accident_insurance" value="" style="display:none;">
+            <input type="text" id="pension-fund" name="pension_fund" value="" style="display:none;">
+            <input type="text" id="iban" name="iban" value="" style="display:none;">
+            <input type="text" id="bank-name" name="bank_name" value="" style="display:none;">
+            <input type="checkbox" id="family-allowances" name="family_allowances" value="1" style="display:none;">
+            <input type="number" id="num-children" name="num_children" min="0" value="0" style="display:none;">
+            <input type="checkbox" id="is-active" name="is_active" value="1" checked style="display:none;">
+            <textarea id="notes" name="notes" style="display:none;"></textarea>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <button type="button" class="btn btn-primary" onclick="testSaveEmployee()" style="padding: 12px 30px; font-size: 16px;">
+                    <i class="fa-solid fa-save"></i> Tester saveEmployee()
+                </button>
+            </div>
+        </form>
+
+        <div class="debug-console" id="debug-console">
+            <div><strong>📋 Console de débogage:</strong></div>
+        </div>
+    </div>
+
+    <script>
+        // Override console.log to display in our debug console
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        const debugConsole = document.getElementById('debug-console');
+
+        function addDebugLine(msg, type = 'log') {
+            const line = document.createElement('div');
+            const timestamp = new Date().toLocaleTimeString();
+            line.innerHTML = `[${timestamp}] ${msg}`;
+            if(type === 'error') line.style.color = '#ff4444';
+            if(type === 'warn') line.style.color = '#ffaa00';
+            debugConsole.appendChild(line);
+            debugConsole.scrollTop = debugConsole.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addDebugLine(args.join(' '), 'log');
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addDebugLine('❌ ' + args.join(' '), 'error');
+        };
+
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addDebugLine('⚠️ ' + args.join(' '), 'warn');
+        };
+
+        // Test function
+        function testSaveEmployee() {
+            addDebugLine('🧪 Début du test...', 'log');
+
+            // Call the actual saveEmployee function from employees.js
+            if(typeof saveEmployee === 'function') {
+                saveEmployee();
+            } else {
+                addDebugLine('❌ ERREUR: saveEmployee() n\'est pas définie!', 'error');
+                addDebugLine('Vérifier que employees.js est chargé correctement', 'error');
+            }
+        }
+
+        // Check if functions are loaded
+        window.addEventListener('DOMContentLoaded', function() {
+            addDebugLine('✅ DOM chargé', 'log');
+
+            setTimeout(() => {
+                if(typeof saveEmployee === 'function') {
+                    addDebugLine('✅ saveEmployee() est disponible', 'log');
+                } else {
+                    addDebugLine('❌ saveEmployee() N\'EST PAS disponible', 'error');
+                }
+
+                if(typeof loadEmployees === 'function') {
+                    addDebugLine('✅ loadEmployees() est disponible', 'log');
+                } else {
+                    addDebugLine('❌ loadEmployees() N\'EST PAS disponible', 'error');
+                }
+            }, 500);
+        });
+    </script>
+
+    <!-- Charger le vrai fichier employees.js -->
+    <script src="assets/js/employees.js"></script>
+
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group.required label::after { content: ' *'; color: red; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { opacity: 0.9; }
+        h3 { margin-top: 20px; color: #333; border-bottom: 2px solid #667eea; padding-bottom: 5px; }
+    </style>
+</body>
+</html>
