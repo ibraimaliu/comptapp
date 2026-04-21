@@ -397,11 +397,25 @@ class PaymentReminder {
         // Generate email body
         $body = $this->generateEmailBody($invoice, $settings);
 
-        // TODO: Implement actual email sending (PHPMailer, SMTP, etc.)
-        // For now, just log and mark as sent
-        error_log("Would send reminder email to: $to_email");
-        error_log("Subject: $subject");
-        error_log("Body: $body");
+        // Envoyer via EmailSender (PHPMailer ou mail() natif selon config)
+        require_once dirname(__DIR__) . '/utils/EmailSender.php';
+        $sender = new EmailSender([
+            'from_email' => $invoice['company_email'] ?? 'noreply@gestion-comptable.local',
+            'from_name'  => $invoice['company_name'] ?? 'Gestion Comptable',
+        ]);
+        $days_overdue = (int) floor((time() - strtotime($invoice['due_date'])) / 86400);
+        $sent = $sender->sendPaymentReminder(
+            $to_email,
+            $invoice['client_name'],
+            $invoice['number'],
+            $invoice['total'],
+            $invoice['due_date'],
+            $days_overdue,
+            $this->reminder_level
+        );
+        if (!$sent) {
+            error_log("PaymentReminder: échec envoi email à $to_email pour facture " . $invoice['number']);
+        }
 
         // Update reminder as sent
         $update_query = "UPDATE " . $this->table_name . "

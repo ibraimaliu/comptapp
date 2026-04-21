@@ -227,7 +227,7 @@ try {
             $employee->accident_insurance = $data['accident_insurance'] ?? null;
             $employee->pension_fund = $data['pension_fund'] ?? null;
             $employee->iban = $data['iban'] ?? null;
-            $employee->bank_name = $data->bank_name ?? null;
+            $employee->bank_name = $data['bank_name'] ?? null;
             $employee->family_allowances = $data['family_allowances'] ?? 0;
             $employee->num_children = $data['num_children'] ?? 0;
             $employee->is_active = $data['is_active'] ?? 1;

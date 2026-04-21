@@ -1,19 +1,16 @@
 <?php
 /**
- * API: Génération PDF Facture
- * Version: 1.0
+ * API: Génération PDF Facture — délègue à PDFGenerator (mPDF + QR-facture)
  */
 
 session_name('COMPTAPP_SESSION');
 session_start();
 
-// Vérifier la session
 if (!isset($_SESSION['company_id']) || !isset($_SESSION['user_id'])) {
     http_response_code(401);
     die('Non autorisé');
 }
 
-// Récupérer l'ID de la facture
 $invoice_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($invoice_id <= 0) {
@@ -21,98 +18,55 @@ if ($invoice_id <= 0) {
     die('ID de facture invalide');
 }
 
-// Inclure les dépendances
 require_once dirname(dirname(__DIR__)) . '/config/database.php';
-require_once dirname(dirname(__DIR__)) . '/models/Invoice.php';
-require_once dirname(dirname(__DIR__)) . '/models/Company.php';
-require_once dirname(dirname(__DIR__)) . '/models/Contact.php';
-require_once dirname(dirname(__DIR__)) . '/vendor/fpdf/fpdf.php';
-require_once dirname(dirname(__DIR__)) . '/utils/InvoicePDF.php';
-
-$company_id = $_SESSION['company_id'];
-
-// Initialiser la base de données
-$database = new Database();
-$db = $database->getConnection();
-
-if (!$db) {
-    http_response_code(500);
-    die('Erreur de connexion à la base de données');
-}
+require_once dirname(dirname(__DIR__)) . '/utils/PDFGenerator.php';
 
 try {
-    // Charger la facture
-    $invoice = new Invoice($db);
-    $invoice->id = $invoice_id;
-    $invoice->company_id = $company_id;
+    $database = new Database();
+    $db = $database->getConnection();
 
-    if (!$invoice->read()) {
+    if (!$db) {
+        throw new Exception('Erreur de connexion à la base de données');
+    }
+
+    // Vérifier que la facture appartient bien à la société courante
+    $stmt = $db->prepare("SELECT id, number FROM invoices WHERE id = :id AND company_id = :company_id LIMIT 1");
+    $stmt->bindParam(':id', $invoice_id);
+    $stmt->bindParam(':company_id', $_SESSION['company_id']);
+    $stmt->execute();
+    $invoice = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$invoice) {
         http_response_code(404);
-        die('Facture non trouvée');
+        die('Facture introuvable');
     }
 
-    // Charger les données de la société
-    $company = new Company($db);
-    $company->id = $company_id;
-    $company->read();
+    $pdf_generator = new PDFGenerator($db);
+    $pdf_path = $pdf_generator->generateInvoicePDF($invoice_id, $_SESSION['company_id'], true);
 
-    $company_data = [
-        'name' => $company->name,
-        'address' => $company->address ?? '',
-        'postal_code' => $company->postal_code ?? '',
-        'city' => $company->city ?? '',
-        'email' => $company->email ?? '',
-        'phone' => $company->phone ?? '',
-        'iban' => $company->iban ?? '',
-        'bank_name' => $company->bank_name ?? ''
-    ];
-
-    // Charger les données du client
-    $contact = new Contact($db);
-    $contact->id = $invoice->client_id;
-    $contact->company_id = $company_id;
-
-    $client_data = [
-        'name' => 'Client inconnu',
-        'address' => '',
-        'postal_code' => '',
-        'city' => ''
-    ];
-
-    if ($contact->read()) {
-        $client_data = [
-            'name' => $contact->name,
-            'address' => $contact->address ?? '',
-            'postal_code' => $contact->postal_code ?? '',
-            'city' => $contact->city ?? ''
-        ];
+    if (!$pdf_path) {
+        throw new Exception('Erreur lors de la génération du PDF');
     }
 
-    // Préparer les données de la facture
-    $invoice_data = [
-        'number' => $invoice->number,
-        'date' => $invoice->date,
-        'due_date' => $invoice->due_date ?? date('Y-m-d', strtotime('+30 days')),
-        'subtotal' => $invoice->subtotal,
-        'tva_amount' => $invoice->tva_amount,
-        'total' => $invoice->total,
-        'qr_reference' => $invoice->qr_reference ?? ''
-    ];
+    $full_path = dirname(dirname(__DIR__)) . '/' . $pdf_path;
 
-    // Charger les lignes de facture
-    $items = $invoice->items;
+    if (!file_exists($full_path)) {
+        throw new Exception('Fichier PDF non trouvé après génération');
+    }
 
-    // Générer le PDF
-    $pdf = new InvoicePDF($company_data, $client_data, $invoice_data, $items);
-    $pdf->generate();
+    $filename = 'Facture_' . $invoice['number'] . '.pdf';
 
-    // Télécharger le PDF
-    $filename = 'Facture_' . $invoice->number . '.pdf';
-    $pdf->download($filename);
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Content-Length: ' . filesize($full_path));
+    header('Cache-Control: private, max-age=0, must-revalidate');
+
+    readfile($full_path);
+    exit;
 
 } catch (Exception $e) {
-    error_log('Error generating PDF: ' . $e->getMessage());
+    error_log('Error in generate_invoice_pdf.php: ' . $e->getMessage());
     http_response_code(500);
-    die('Erreur lors de la génération du PDF: ' . $e->getMessage());
+    die('Erreur serveur: ' . $e->getMessage());
 }
 ?>

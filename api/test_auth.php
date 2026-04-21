@@ -1,8 +1,11 @@
 <?php
 /**
- * Fichier de test pour l'API auth.php
- * Utilisez ce fichier pour tester la réponse de l'API
+ * Fichier de test pour l'API auth.php (localhost uniquement)
  */
+if (!in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'])) {
+    http_response_code(403);
+    die('Accès refusé');
+}
 
 // Simuler une requête POST
 $_SERVER['REQUEST_METHOD'] = 'POST';

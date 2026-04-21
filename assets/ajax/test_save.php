@@ -1,5 +1,9 @@
 <?php
-// ajax/test_save.php - Test de sauvegarde ultra-simple
+// ajax/test_save.php - Test de sauvegarde ultra-simple (localhost uniquement)
+if (!in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'])) {
+    http_response_code(403);
+    die('Accès refusé');
+}
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 

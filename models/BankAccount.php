@@ -318,8 +318,15 @@ class BankAccount {
             return false;
         }
 
-        // TODO: Implement full IBAN checksum validation (modulo 97)
-        return true;
+        // Modulo 97 checksum (ISO 13616)
+        // Move first 4 chars to end, replace letters with digits (A=10, B=11, …)
+        $rearranged = substr($iban, 4) . substr($iban, 0, 4);
+        $numeric = '';
+        foreach (str_split($rearranged) as $char) {
+            $numeric .= ctype_alpha($char) ? (string)(ord(strtoupper($char)) - 55) : $char;
+        }
+        // bcmod handles arbitrarily large integers
+        return bcmod($numeric, '97') === '1';
     }
 
     /**
