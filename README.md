@@ -412,4 +412,5 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 🚀 **Démarrez maintenant avec le [Guide de Démarrage Rapide](GUIDE_DEMARRAGE_RAPIDE.md)!**
 #   c o m p t a p p  
+ #   c o m p t a p p  
  
