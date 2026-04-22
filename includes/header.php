@@ -264,218 +264,254 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
     <div class="menus">
         <ul>
+            <!-- Accueil -->
             <li style="--clr:#2483ff;" class="menu-item <?php echo ($current_page == 'home') ? 'active' : ''; ?>" data-target="home">
                 <a href="index.php?page=home">
                     <i class="fa-solid fa-house"></i>
-                    <span>Home</span>
+                    <span>Accueil</span>
                 </a>
             </li>
 
+            <!-- Tableau de bord analytique -->
             <li style="--clr:#9b59b6;" class="menu-item <?php echo ($current_page == 'dashboard_advanced') ? 'active' : ''; ?>" data-target="dashboard">
                 <a href="index.php?page=dashboard_advanced">
-                    <i class="fa-solid fa-chart-line"></i>
+                    <i class="fa-solid fa-gauge-high"></i>
                     <span>Analytiques</span>
                 </a>
             </li>
 
-            <!-- Comptabilité avec sous-menu -->
-            <li style="--clr:#fff200;" class="menu-item has-submenu <?php echo (in_array($current_page, ['comptabilite', 'transaction_create', 'releve_compte', 'bilan', 'compte_resultat'])) ? 'active' : ''; ?>" data-target="comptabilite">
+            <!-- Comptabilité -->
+            <li style="--clr:#fff200;" class="menu-item has-submenu <?php echo (in_array($current_page, ['comptabilite', 'transaction_create', 'releve_compte', 'bilan', 'compte_resultat', 'tva_declaration'])) ? 'active' : ''; ?>" data-target="comptabilite">
                 <a href="#" onclick="toggleSubmenu(event, this)">
                     <i class="fa-solid fa-book"></i>
                     <span>Comptabilité</span>
-                    <i class='fa-solid fa-chevron-down submenu-arrow'></i>
+                    <i class="fa-solid fa-chevron-down submenu-arrow"></i>
                 </a>
                 <ul class="submenu">
                     <li class="submenu-item <?php echo ($current_page == 'comptabilite') ? 'active' : ''; ?>">
                         <a href="index.php?page=comptabilite">
-                            <i class='fa-solid fa-list'></i>
-                            <span>Toutes les Transactions</span>
+                            <i class="fa-solid fa-list"></i>
+                            <span>Transactions</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'transaction_create') ? 'active' : ''; ?>">
                         <a href="index.php?page=transaction_create">
-                            <i class='fa-solid fa-plus-circle'></i>
+                            <i class="fa-solid fa-plus-circle"></i>
                             <span>Nouvelle Transaction</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'releve_compte') ? 'active' : ''; ?>">
                         <a href="index.php?page=releve_compte">
-                            <i class='fa-solid fa-file-lines'></i>
-                            <span>Relevé de Compte</span>
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Grand Livre</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'bilan') ? 'active' : ''; ?>">
                         <a href="index.php?page=bilan">
-                            <i class='fa-solid fa-balance-scale'></i>
+                            <i class="fa-solid fa-scale-balanced"></i>
                             <span>Bilan</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'compte_resultat') ? 'active' : ''; ?>">
                         <a href="index.php?page=compte_resultat">
-                            <i class='fa-solid fa-chart-bar'></i>
-                            <span>Compte de Résultat (PP)</span>
+                            <i class="fa-solid fa-chart-bar"></i>
+                            <span>Compte de Résultat</span>
+                        </a>
+                    </li>
+                    <li class="submenu-item <?php echo ($current_page == 'tva_declaration') ? 'active' : ''; ?>">
+                        <a href="index.php?page=tva_declaration">
+                            <i class="fa-solid fa-percent"></i>
+                            <span>Déclaration TVA</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            
-            <li style="--clr:#e7f920bb;" class="menu-item <?php echo ($current_page == 'adresses') ? 'active' : ''; ?>" data-target="adresses">
-                <a href="index.php?page=adresses">
-                    <i class='fa-solid fa-user'></i>
-                    <span>Adresses - Contacts</span>
-                </a>
-            </li>
 
-            <li style="--clr:#f39c12;" class="menu-item <?php echo ($current_page == 'products') ? 'active' : ''; ?>" data-target="products">
-                <a href="index.php?page=products">
-                    <i class="fa-solid fa-box"></i>
-                    <span>Produits & Stock</span>
-                </a>
-            </li>
-
-            <li style="--clr:#e74c3c;" class="menu-item <?php echo ($current_page == 'tva_declaration') ? 'active' : ''; ?>" data-target="tva">
-                <a href="index.php?page=tva_declaration">
-                    <i class="fa-solid fa-percent"></i>
-                    <span>Déclaration TVA</span>
-                </a>
-            </li>
-
-            <li style="--clr:#06b6d4;" class="menu-item <?php echo ($current_page == 'tresorerie') ? 'active' : ''; ?>" data-target="tresorerie">
-                <a href="index.php?page=tresorerie">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <span>Trésorerie</span>
-                </a>
-            </li>
-
-            <!-- Facturation avec sous-menu -->
-            <li style="--clr:#38ef7d;" class="menu-item has-submenu <?php echo (in_array($current_page, ['devis', 'factures', 'recurring_invoices', 'factures_recurrentes', 'bank_reconciliation', 'rapprochement', 'payment_reminders', 'rappels', 'supplier_invoices', 'payments'])) ? 'active' : ''; ?>" data-target="facturation">
+            <!-- Ventes -->
+            <li style="--clr:#38ef7d;" class="menu-item has-submenu <?php echo (in_array($current_page, ['devis', 'factures', 'recurring_invoices', 'factures_recurrentes', 'payment_reminders', 'rappels'])) ? 'active' : ''; ?>" data-target="ventes">
                 <a href="#" onclick="toggleSubmenu(event, this)">
-                    <i class='fa-solid fa-file-invoice'></i>
-                    <span>Facturation</span>
-                    <i class='fa-solid fa-chevron-down submenu-arrow'></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Ventes</span>
+                    <i class="fa-solid fa-chevron-down submenu-arrow"></i>
                 </a>
                 <ul class="submenu">
                     <li class="submenu-item <?php echo ($current_page == 'devis') ? 'active' : ''; ?>">
                         <a href="index.php?page=devis">
-                            <i class='fa-solid fa-file-alt'></i>
+                            <i class="fa-solid fa-file-alt"></i>
                             <span>Devis</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'factures') ? 'active' : ''; ?>">
                         <a href="index.php?page=factures">
-                            <i class='fa-solid fa-file-invoice'></i>
+                            <i class="fa-solid fa-file-invoice"></i>
                             <span>Factures</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'recurring_invoices' || $current_page == 'factures_recurrentes') ? 'active' : ''; ?>">
-                        <a href="index.php?page=recurring_invoices">
-                            <i class='fa-solid fa-repeat'></i>
+                        <a href="index.php?page=factures_recurrentes">
+                            <i class="fa-solid fa-repeat"></i>
                             <span>Factures Récurrentes</span>
-                        </a>
-                    </li>
-                    <li class="submenu-item <?php echo ($current_page == 'bank_reconciliation' || $current_page == 'rapprochement') ? 'active' : ''; ?>">
-                        <a href="index.php?page=bank_reconciliation">
-                            <i class='fa-solid fa-sync-alt'></i>
-                            <span>Rapprochement</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'payment_reminders' || $current_page == 'rappels') ? 'active' : ''; ?>">
                         <a href="index.php?page=payment_reminders">
-                            <i class='fa-solid fa-bell'></i>
-                            <span>Rappels</span>
+                            <i class="fa-solid fa-bell"></i>
+                            <span>Rappels de Paiement</span>
                         </a>
                     </li>
+                </ul>
+            </li>
+
+            <!-- Achats -->
+            <li style="--clr:#f39c12;" class="menu-item has-submenu <?php echo (in_array($current_page, ['supplier_invoices', 'payments'])) ? 'active' : ''; ?>" data-target="achats">
+                <a href="#" onclick="toggleSubmenu(event, this)">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <span>Achats</span>
+                    <i class="fa-solid fa-chevron-down submenu-arrow"></i>
+                </a>
+                <ul class="submenu">
                     <li class="submenu-item <?php echo ($current_page == 'supplier_invoices') ? 'active' : ''; ?>">
                         <a href="index.php?page=supplier_invoices">
-                            <i class='fa-solid fa-file-invoice-dollar'></i>
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
                             <span>Factures Fournisseurs</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo ($current_page == 'payments') ? 'active' : ''; ?>">
                         <a href="index.php?page=payments">
-                            <i class='fa-solid fa-money-bill-wave'></i>
-                            <span>Historique Paiements</span>
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                            <span>Paiements</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <!-- Salaires (module optionnel selon plan) -->
-            <li style="--clr:#10b981;" class="menu-item has-submenu <?php echo (in_array($current_page, ['employees', 'employes', 'payroll', 'salaires', 'fiches_paie'])) ? 'active' : ''; ?>" data-target="salaires">
+            <!-- Banque -->
+            <li style="--clr:#06b6d4;" class="menu-item has-submenu <?php echo (in_array($current_page, ['bank_reconciliation', 'rapprochement', 'tresorerie'])) ? 'active' : ''; ?>" data-target="banque">
+                <a href="#" onclick="toggleSubmenu(event, this)">
+                    <i class="fa-solid fa-landmark"></i>
+                    <span>Banque</span>
+                    <i class="fa-solid fa-chevron-down submenu-arrow"></i>
+                </a>
+                <ul class="submenu">
+                    <li class="submenu-item <?php echo ($current_page == 'bank_reconciliation' || $current_page == 'rapprochement') ? 'active' : ''; ?>">
+                        <a href="index.php?page=bank_reconciliation">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            <span>Rapprochement Bancaire</span>
+                        </a>
+                    </li>
+                    <li class="submenu-item <?php echo ($current_page == 'tresorerie') ? 'active' : ''; ?>">
+                        <a href="index.php?page=tresorerie">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Trésorerie</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Stock -->
+            <li style="--clr:#e67e22;" class="menu-item <?php echo ($current_page == 'products') ? 'active' : ''; ?>" data-target="stock">
+                <a href="index.php?page=products">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <span>Stock</span>
+                </a>
+            </li>
+
+            <!-- RH / Salaires -->
+            <li style="--clr:#10b981;" class="menu-item has-submenu <?php echo (in_array($current_page, ['employees', 'employes', 'payroll', 'salaires', 'fiches_paie'])) ? 'active' : ''; ?>" data-target="rh">
                 <a href="#" onclick="toggleSubmenu(event, this)">
                     <i class="fa-solid fa-user-tie"></i>
-                    <span>Salaires</span>
-                    <i class='fa-solid fa-chevron-down submenu-arrow'></i>
+                    <span>RH</span>
+                    <i class="fa-solid fa-chevron-down submenu-arrow"></i>
                 </a>
                 <ul class="submenu">
                     <li class="submenu-item <?php echo ($current_page == 'employees' || $current_page == 'employes') ? 'active' : ''; ?>">
                         <a href="index.php?page=employees">
-                            <i class='fa-solid fa-users'></i>
+                            <i class="fa-solid fa-users"></i>
                             <span>Employés</span>
                         </a>
                     </li>
                     <li class="submenu-item <?php echo (in_array($current_page, ['payroll', 'salaires', 'fiches_paie'])) ? 'active' : ''; ?>">
                         <a href="index.php?page=payroll">
-                            <i class='fa-solid fa-file-invoice-dollar'></i>
-                            <span>Fiches de Paie</span>
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                            <span>Salaires / Paie</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <?php if (isset($_SESSION['tenant_database'])): ?>
-            <li style="--clr:#3498db;" class="menu-item <?php echo ($current_page == 'mon_compte') ? 'active' : ''; ?>" data-target="mon_compte">
-                <a href="index.php?page=mon_compte">
-                    <i class="fa-solid fa-user-circle"></i>
-                    <span>Mon Compte</span>
+            <!-- Contacts -->
+            <li style="--clr:#e7f920bb;" class="menu-item <?php echo ($current_page == 'adresses') ? 'active' : ''; ?>" data-target="contacts">
+                <a href="index.php?page=adresses">
+                    <i class="fa-solid fa-address-book"></i>
+                    <span>Contacts</span>
                 </a>
             </li>
 
-            <li style="--clr:#8b5cf6;" class="menu-item <?php echo ($current_page == 'mes_societes' || $current_page == 'my_companies') ? 'active' : ''; ?>" data-target="mes_societes">
-                <a href="index.php?page=mes_societes">
-                    <i class="fa-solid fa-building"></i>
-                    <span>Mes Sociétés</span>
+            <!-- Administration -->
+            <li style="--clr:#8b5cf6;" class="menu-item has-submenu <?php echo (in_array($current_page, ['parametres', 'mon_compte', 'mes_societes', 'my_companies', 'users_management', 'gestion_utilisateurs', 'recherche'])) ? 'active' : ''; ?>" data-target="administration">
+                <a href="#" onclick="toggleSubmenu(event, this)">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Administration</span>
+                    <i class="fa-solid fa-chevron-down submenu-arrow"></i>
                 </a>
+                <ul class="submenu">
+                    <li class="submenu-item <?php echo ($current_page == 'parametres') ? 'active' : ''; ?>">
+                        <a href="index.php?page=parametres">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Paramètres</span>
+                        </a>
+                    </li>
+                    <li class="submenu-item <?php echo ($current_page == 'mon_compte') ? 'active' : ''; ?>">
+                        <a href="index.php?page=mon_compte">
+                            <i class="fa-solid fa-circle-user"></i>
+                            <span>Mon Compte</span>
+                        </a>
+                    </li>
+                    <li class="submenu-item <?php echo ($current_page == 'mes_societes' || $current_page == 'my_companies') ? 'active' : ''; ?>">
+                        <a href="index.php?page=mes_societes">
+                            <i class="fa-solid fa-building"></i>
+                            <span>Mes Sociétés</span>
+                        </a>
+                    </li>
+                    <?php
+                    // Gestion des utilisateurs : visible si permission users.view disponible
+                    $show_users_menu = false;
+                    if (isset($_SESSION['tenant_database'])) {
+                        if (!isset($db)) {
+                            require_once 'config/database.php';
+                            $database = new Database();
+                            $db = $database->getConnection();
+                        }
+                        if (file_exists('utils/PermissionHelper.php')) {
+                            require_once 'utils/PermissionHelper.php';
+                            $show_users_menu = PermissionHelper::hasPermission($db, 'users.view');
+                        }
+                    } else {
+                        // En mode non-tenant, afficher quand même si l'utilisateur est connecté
+                        $show_users_menu = isset($_SESSION['user_id']);
+                    }
+                    if ($show_users_menu):
+                    ?>
+                    <li class="submenu-item <?php echo ($current_page == 'users_management' || $current_page == 'gestion_utilisateurs') ? 'active' : ''; ?>">
+                        <a href="index.php?page=users_management">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <span>Gestion Utilisateurs</span>
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                    <li class="submenu-item <?php echo ($current_page == 'recherche') ? 'active' : ''; ?>">
+                        <a href="index.php?page=recherche">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Recherche</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <?php endif; ?>
 
-            <?php
-            // Menu Gestion des utilisateurs (multi-tenant uniquement, permission users.view requise)
-            if (isset($_SESSION['tenant_database'])) {
-                require_once 'config/database.php';
-                require_once 'utils/PermissionHelper.php';
-                $database = new Database();
-                $db = $database->getConnection();
-                if (PermissionHelper::hasPermission($db, 'users.view')) {
-            ?>
-            <li style="--clr:#9b59b6;" class="menu-item <?php echo ($current_page == 'users_management' || $current_page == 'gestion_utilisateurs') ? 'active' : ''; ?>" data-target="users">
-                <a href="index.php?page=users_management">
-                    <i class="fa-solid fa-users-gear"></i>
-                    <span>Gestion des Utilisateurs</span>
-                </a>
-            </li>
-            <?php
-                }
-            }
-            ?>
-
-            <li style="--clr:#25d366;" class="menu-item <?php echo ($current_page == 'parametres') ? 'active' : ''; ?>" data-target="parametres">
-                <a href="index.php?page=parametres">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>Paramètres</span>
-                </a>
-            </li>
-
-            <li style="--clr:#e70909;" class="menu-item <?php echo ($current_page == 'recherche') ? 'active' : ''; ?>" data-target="recherche">
-                <a href="index.php?page=recherche">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <span>Recherche</span>
-                </a>
-            </li>
-            
-            <li style="--clr:#555555;">
+            <!-- Déconnexion -->
+            <li style="--clr:#ef4444;" class="menu-item menu-item-logout">
                 <a href="index.php?page=logout">
-                    <i class="fa-solid fa-sign-out-alt"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Déconnexion</span>
                 </a>
             </li>

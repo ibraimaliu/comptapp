@@ -255,7 +255,7 @@ body {
 }
 
 .menus ul li.has-submenu.submenu-open .submenu {
-    max-height: 600px; /* Augmenté pour supporter plus d'items */
+    max-height: 800px; /* Assez grand pour les sous-menus les plus longs */
     opacity: 1;
     margin-top: 5px;
     visibility: visible;
@@ -296,6 +296,16 @@ body {
 
 .menus ul li.has-submenu.submenu-open {
     margin-bottom: 15px;
+}
+
+/* Item de déconnexion */
+.menus ul li.menu-item-logout:hover {
+    background: #ef4444;
+}
+
+/* Item actif dans le menu principal */
+.menus ul li.menu-item.active {
+    background: var(--clr, #2483ff);
 }
 
 /* Formulaires (login, register, etc.) */

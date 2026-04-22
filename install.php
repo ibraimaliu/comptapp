@@ -182,5 +182,36 @@ if (!$admin_exists) {
     }
 }
 
+// Tables complémentaires (modules avancés)
+$missing_sql = __DIR__ . '/install_missing_tables.sql';
+if (file_exists($missing_sql)) {
+    echo "<h2>Installation des modules complémentaires</h2>";
+    $sql_content = file_get_contents($missing_sql);
+    $statements = array_filter(array_map('trim', explode(';', $sql_content)));
+    $created = $altered = $errors = 0;
+    foreach ($statements as $statement) {
+        if (empty($statement) || strpos(ltrim($statement), '--') === 0) continue;
+        try {
+            $db->exec($statement);
+            if (preg_match('/CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+`?(\w+)`?/i', $statement, $m)) {
+                echo "<p style='color:green'>&#10003; Table <strong>{$m[1]}</strong> : OK</p>";
+                $created++;
+            } elseif (stripos(ltrim($statement), 'ALTER') === 0) {
+                if (preg_match('/ALTER\s+TABLE\s+`?(\w+)`?/i', $statement, $m)) {
+                    echo "<p style='color:#555'>&#8594; Table <strong>{$m[1]}</strong> : colonnes vérifiées</p>";
+                }
+                $altered++;
+            }
+        } catch (PDOException $e) {
+            $msg = $e->getMessage();
+            if (strpos($msg, 'Duplicate key') === false && strpos($msg, 'already exists') === false) {
+                echo "<p style='color:red'>Erreur: " . htmlspecialchars($msg) . "</p>";
+                $errors++;
+            }
+        }
+    }
+    echo "<p><strong>Résumé modules :</strong> {$created} table(s) créées, {$altered} table(s) modifiées, {$errors} erreur(s).</p>";
+}
+
 echo "<p style='margin-top:20px;'><a href='index.php'>Retourner à l'application</a></p>";
 ?>
