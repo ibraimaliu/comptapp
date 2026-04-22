@@ -678,10 +678,15 @@ ALTER TABLE `companies`
   ADD COLUMN IF NOT EXISTS `website` VARCHAR(255) DEFAULT NULL,
   ADD COLUMN IF NOT EXISTS `ide_number` VARCHAR(20) DEFAULT NULL,
   ADD COLUMN IF NOT EXISTS `tva_number` VARCHAR(20) DEFAULT NULL,
+  ADD COLUMN IF NOT EXISTS `rc_number` VARCHAR(20) DEFAULT NULL,
   ADD COLUMN IF NOT EXISTS `bank_name` VARCHAR(100) DEFAULT NULL,
   ADD COLUMN IF NOT EXISTS `iban` VARCHAR(34) DEFAULT NULL,
   ADD COLUMN IF NOT EXISTS `bic` VARCHAR(11) DEFAULT NULL,
   ADD COLUMN IF NOT EXISTS `qr_iban` VARCHAR(34) DEFAULT NULL;
+
+-- Migrer l'ancien ENUM('oui','non') vers les valeurs réelles du formulaire
+ALTER TABLE `companies`
+  MODIFY COLUMN `tva_status` ENUM('assujetti','non_assujetti','franchise') NOT NULL DEFAULT 'non_assujetti';
 
 ALTER TABLE `invoices`
   ADD COLUMN IF NOT EXISTS `contact_id` INT DEFAULT NULL,

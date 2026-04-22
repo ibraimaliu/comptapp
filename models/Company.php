@@ -89,7 +89,8 @@ class Company {
         $this->bic = htmlspecialchars(strip_tags($this->bic ?? ''));
         $this->fiscal_year_start = htmlspecialchars(strip_tags($this->fiscal_year_start ?? ''));
         $this->fiscal_year_end = htmlspecialchars(strip_tags($this->fiscal_year_end ?? ''));
-        $this->tva_status = htmlspecialchars(strip_tags($this->tva_status ?? 'non'));
+        $allowed_tva = ['assujetti', 'non_assujetti', 'franchise'];
+        $this->tva_status = in_array($this->tva_status, $allowed_tva) ? $this->tva_status : 'non_assujetti';
 
         // Lier les valeurs
         $stmt->bindParam(":user_id", $this->user_id);
@@ -257,7 +258,8 @@ class Company {
         $this->bic = htmlspecialchars(strip_tags($this->bic ?? ''));
         $this->fiscal_year_start = htmlspecialchars(strip_tags($this->fiscal_year_start ?? ''));
         $this->fiscal_year_end = htmlspecialchars(strip_tags($this->fiscal_year_end ?? ''));
-        $this->tva_status = htmlspecialchars(strip_tags($this->tva_status ?? 'non'));
+        $allowed_tva = ['assujetti', 'non_assujetti', 'franchise'];
+        $this->tva_status = in_array($this->tva_status, $allowed_tva) ? $this->tva_status : 'non_assujetti';
         $this->id = htmlspecialchars(strip_tags($this->id ?? ''));
 
         // Lier les valeurs
