@@ -5,6 +5,11 @@
 --              absentes du install.php principal.
 -- ============================================================================
 
+USE `gestion_comptable`;
+
+-- ============================================================================
+-- ============================================================================
+
 -- GROUPE 1: QR-FACTURES
 CREATE TABLE IF NOT EXISTS `qr_payment_settings` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
